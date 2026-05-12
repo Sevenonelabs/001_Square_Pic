@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self';"/>
+    <title>FAQ - SquarePic</title>
+    <meta name="description" content="Frequently asked questions about SquarePic - the free, privacy-first browser image editor for square photos." />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo" style="text-decoration: none;">SquarePic</a>
+      <a href="index.html" class="btn-secondary" style="width: auto; padding: 0.4rem 1rem;">← Back to Editor</a>
+    </header>
+    <main>
+      <section class="content-section legal-content">
+        <h1>Frequently Asked Questions</h1>
+        <div class="legal-meta">
+          <span>14 Questions</span>
+          <span class="legal-badge">Quick Answers</span>
+        </div>
+
+        <!-- General -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> General</h2>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3>What is SquarePic?</h3>
+              <p>SquarePic is a free, browser-based image editor that makes any photo perfectly square. It's designed for content creators, photographers, and social media users who need square images for Instagram and similar platforms - without cropping out important parts of the photo.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Is SquarePic free?</h3>
+              <p>Yes, completely. There are no paid plans, no premium features, no watermarks added to your exports, and no usage limits. SquarePic is free to use for personal and commercial purposes.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Do I need to create an account?</h3>
+              <p>No. SquarePic requires no account, no sign-up, and no email address. Open the page, upload your image, edit it, and download it - no friction at all.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Can I use the edited images commercially?</h3>
+              <p>SquarePic adds no restrictions on how you use your exported images. However, you must ensure you have the necessary rights to the original image you uploaded. See our <a href="terms.html">Terms &amp; Conditions</a> for details.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy & Data -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Privacy &amp; Data</h2>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3>Is my image uploaded to a server?</h3>
+              <p>No, never. All image processing happens entirely within your web browser using the HTML5 Canvas API. Your image files never leave your device and are never transmitted over the internet. When you close the tab, the image data is immediately cleared from memory.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Does SquarePic track me or use cookies?</h3>
+              <p>No. SquarePic uses no analytics, no tracking scripts, no cookies, and no localStorage. The only external network request is loading the Inter font from Google Fonts. See our <a href="privacy.html">Privacy Policy</a> for full details.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Is SquarePic safe to use with private or sensitive photos?</h3>
+              <p>Yes. Because nothing is uploaded or transmitted, SquarePic is safe to use with personal, confidential, or client photos. Your images stay on your device the entire time.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Using the Editor -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Using the Editor</h2>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3>What's the difference between Blur Frame, Solid Color, and Crop to Fill?</h3>
+              <p><strong>Blur Frame</strong> keeps your full image and fills the square border with a blurred, darkened version of the same image - creating a seamless, polished look. <strong>Solid Color</strong> surrounds your image with a clean single colour border you choose. <strong>Crop to Fill</strong> zooms into the centre of your image to fill the square completely, trimming the edges.</p>
+            </div>
+            <div class="faq-item">
+              <h3>What image formats can I upload?</h3>
+              <p>SquarePic accepts any image format your browser supports, including JPEG, PNG, WebP, GIF, AVIF, and SVG. Files must be under 20 MB.</p>
+            </div>
+            <div class="faq-item">
+              <h3>What export formats are available?</h3>
+              <p>You can export your squared photo as <strong>PNG</strong> (lossless, largest file size), <strong>JPEG</strong> (lossy, smallest file size, best for photos), or <strong>WebP</strong> (modern format, excellent quality-to-size ratio). For JPEG and WebP, you can adjust the quality from 10% to 100%.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Why is the quality slider greyed out when I select PNG?</h3>
+              <p>PNG is a lossless format - it always saves at maximum quality and compression settings do not apply. The quality slider is only relevant for JPEG and WebP, which use lossy compression. Switch to either of those formats to re-enable it.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Why does the export look different from what I see in the editor?</h3>
+              <p>The preview in the editor is displayed using CSS styling on the canvas element. The export captures the raw canvas pixel data. In current versions of SquarePic, these are kept in sync - both use the same formula for all effects. If you notice a difference, try refreshing and re-uploading your image.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Can I use SquarePic on my phone or tablet?</h3>
+              <p>Yes. SquarePic works on mobile browsers including Chrome and Safari on iOS and Android. The layout switches to a single-column view on smaller screens. Note that uploading via drag-and-drop may not work on all mobile browsers - use the Browse Files button instead.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Still need help? -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Still Have a Question?</h2>
+          <p>If your question isn't answered here, visit our <a href="support.html">Support page</a> for troubleshooting steps or to contact us directly at <a href="mailto:support@squarepic.com">support@squarepic.com</a>.</p>
+        </div>
+
+      </section>
+    </main>
+    <footer>
+      <nav class="footer-nav">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="support.html">Support</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+      &copy; 2026 SquarePic &bull; Simple Square Photo Editor
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

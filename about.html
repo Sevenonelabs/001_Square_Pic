@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self';"/>
+    <title>About - SquarePic</title>
+    <meta name="description" content="SquarePic is a free, privacy-first browser tool that creates perfectly square photos for Instagram and social media - no uploads, no accounts." />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo" style="text-decoration: none;">SquarePic</a>
+      <a href="index.html" class="btn-secondary" style="width: auto; padding: 0.4rem 1rem;">← Back to Editor</a>
+    </header>
+    <main>
+      <section class="content-section legal-content">
+
+        <h1>About SquarePic</h1>
+        <div class="legal-meta">
+          <span>Free &amp; Open to Use</span>
+          <span>No Account Required</span>
+          <span class="legal-badge">100% Browser-Based</span>
+        </div>
+
+        <div class="legal-highlight">
+          SquarePic is a lightweight, privacy-first image tool that lets you create perfectly square photos in seconds - right in your browser, with zero uploads and zero tracking.
+        </div>
+
+        <!-- What is SquarePic -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> What Is SquarePic?</h2>
+          <p>SquarePic is a free, browser-based photo editor designed for one specific job: making any image square, beautifully. Whether you have a wide landscape shot, a tall portrait, or a panoramic photo, SquarePic transforms it into a perfect square without awkward cropping.</p>
+          <p>It's built for content creators, photographers, social media managers, and anyone who regularly publishes images to platforms like Instagram, which traditionally favour square or near-square formats.</p>
+        </div>
+
+        <!-- The Problem We Solve -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> The Problem We Solve</h2>
+          <p>Most photos taken on phones and cameras are rectangular - but social media grids are square. The standard approach of cropping loses important parts of your image. SquarePic gives you three smarter options:</p>
+          <ul>
+            <li><strong>Blur Frame</strong> - Extends the image with a beautifully blurred version of itself as the border. The full image is preserved and the result looks intentional and polished.</li>
+            <li><strong>Solid Color</strong> - Surrounds your image with a clean, single-colour border. Choose from a curated palette or pick any custom colour. Great for branded content.</li>
+            <li><strong>Crop to Fill</strong> - Intelligently crops the image to fill the square canvas from its centre. Ideal when the subject is centred and you're happy to trim the edges.</li>
+          </ul>
+        </div>
+
+        <!-- Key Features -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Key Features</h2>
+          <ul>
+            <li><strong>Three framing modes</strong> - Blur Frame, Solid Color, and Crop to Fill.</li>
+            <li><strong>Adjustable blur intensity</strong> — Control exactly how soft or dramatic the background blur is.</li>
+            <li><strong>Border padding control</strong> — Adjust the thickness of the border from 0% to 40%.</li>
+            <li><strong>Zoom level</strong> — Scale the inner image up or down within the canvas.</li>
+            <li><strong>Rounded corners</strong> - Add subtle or dramatic corner rounding to the final image - all the way to a perfect circle.</li>
+            <li><strong>Custom colour picker</strong> — Choose any colour for solid borders, with a curated swatch palette for quick selection.</li>
+            <li><strong>Export formats</strong> — Download your image as PNG (lossless), JPEG, or WebP with adjustable quality.</li>
+            <li><strong>Real-time preview</strong> — Every change updates the canvas instantly as you adjust the controls.</li>
+            <li><strong>Drag &amp; drop upload</strong> — Drop an image directly onto the editor to get started immediately.</li>
+          </ul>
+        </div>
+
+        <!-- Privacy Philosophy -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Built for Privacy</h2>
+          <div class="legal-highlight">
+            Your images never leave your device. Everything happens locally in your browser using the HTML5 Canvas API — no server, no cloud, no uploads.
+          </div>
+          <p>We deliberately chose a fully client-side architecture because we believe your photos are personal. You shouldn't have to trust a server with wedding photos, client work, or anything else just to make it square.</p>
+          <p>SquarePic collects zero analytics, uses zero cookies, and requires zero accounts. You open it, edit your image, download it, and leave. Simple.</p>
+        </div>
+
+        <!-- Who It's For -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Who It's For</h2>
+          <ul>
+            <li><strong>Instagram creators</strong> who want a consistent, square grid without losing their full-frame shots.</li>
+            <li><strong>Photographers</strong> who need a quick, non-destructive way to prepare images for social sharing.</li>
+            <li><strong>Social media managers</strong> handling content for brands that require precise, consistent formatting.</li>
+            <li><strong>Designers</strong> who need a quick square export without opening a full design tool.</li>
+            <li><strong>Anyone</strong> who's ever been frustrated by a platform cropping their photo in the wrong place.</li>
+          </ul>
+        </div>
+
+        <!-- How It Works -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> How It Works</h2>
+          <p>SquarePic uses the browser's built-in <strong>HTML5 Canvas API</strong> to process images in real time. Here's what happens when you use it:</p>
+          <ul>
+            <li>You upload or drag an image onto the editor.</li>
+            <li>The image is read locally using the <code>FileReader</code> API - it never touches a network.</li>
+            <li>The canvas is set to a square size matching the longest dimension of your image.</li>
+            <li>The selected background style (blur, solid, or crop) is drawn onto the canvas.</li>
+            <li>Your image is composited on top, centred, with your chosen padding, zoom, and corner settings applied.</li>
+            <li>When you click Save Image, the canvas is encoded as your chosen format and downloaded directly to your device.</li>
+          </ul>
+          <p>The whole process happens in milliseconds, entirely within your browser tab.</p>
+        </div>
+
+        <!-- Completely Free -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Completely Free</h2>
+          <p>SquarePic is and will remain completely free to use. There are no paid tiers, no premium features locked behind a subscription, no watermarks added to your images, and no usage limits.</p>
+          <p>If you find SquarePic useful, the best support you can offer is sharing it with someone who might need it.</p>
+        </div>
+
+        <!-- Contact -->
+        <div class="legal-section">
+          <h2><span class="clause-num">✦</span> Get in Touch</h2>
+          <p>We'd love to hear from you - whether it's a feature request, a bug report, or just a message to say hello.</p>
+          <p>
+            📧 <a href="mailto:support@squarepic.com">support@squarepic.com</a><br>
+            🙋 <a href="support.html">Visit the Support page</a><br>
+            ❓ <a href="faq.html">Read the FAQ</a>
+          </p>
+          <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 1rem;">
+            SquarePic is an independent application and is not affiliated with Instagram, Meta, or any other social media platform.
+          </p>
+        </div>
+
+      </section>
+    </main>
+    <footer>
+      <nav class="footer-nav">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="support.html">Support</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+      &copy; 2026 SquarePic &bull; Simple Square Photo Editor
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
