@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self';"/>
-    <title>SquarePic - Free Square Photo Editor for Instagram & Social Media</title>
-    <meta name="description" content="Make any photo perfectly square in seconds. Add blurred backgrounds, solid colors, or crop to fill. Free, no signup, works in your browser - no uploads." />
+    <title>Square Image Maker | Free No Crop Photo Editor for Instagram</title>
+    <meta name="description" content="Create perfectly square photos for Instagram and social media without cropping. Use our professional, privacy-first tool to add blurred borders or solid backgrounds in seconds. 100% free with no watermarks." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,15 +19,15 @@
       </div>
       
       <div class="header-center-title">
-        Make any photo <span class="lp-accent">perfectly square</span>
+        The Professional <span class="lp-accent">Square Image Maker</span>
       </div>
 
       <div class="header-right">
         <nav class="header-nav">
           <div class="nav-trust-badges">
-            <span class="badge-item"><span class="badge-check">✓</span> 100% Free</span>
+            <span class="badge-item"><span class="badge-check">✓</span> 100% Free Tool</span>
             <span class="badge-item"><span class="badge-check">✓</span> No Watermarks</span>
-            <span class="badge-item"><span class="badge-check">✓</span> Private</span>
+            <span class="badge-item"><span class="badge-check">✓</span> 100% Privacy-First</span>
           </div>
         </nav>
         <div class="theme-picker" id="themePicker" aria-label="Choose accent color">
@@ -44,11 +44,7 @@
 
     <!-- ═══════════════════ LANDING SECTION ═══════════════════ -->
     <section id="landing-section" aria-label="SquarePic product overview">
-
       <!-- Trust Bar moved below editor -->
-
-
-
     </section>
     <!-- ══════════════════ END LANDING ══════════════════════── -->
 
@@ -62,9 +58,9 @@
               <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin-bottom: 1rem;">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
-              <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main);">Upload a Photo</h2>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Drag &amp; drop an image here</p>
-              <button class="btn-primary" id="uploadBtn" style="width: auto;">Browse Files</button>
+              <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main);">Start Editing Your Photo</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Drag &amp; drop your image or click to browse</p>
+              <button class="btn-primary" id="uploadBtn" style="width: auto;">Select Image</button>
               <input type="file" id="fileInput" hidden accept="image/*">
             </div>
           </div>
@@ -77,7 +73,7 @@
                   Export
                 </button>
                 <div class="export-panel" id="exportMenu">
-                  <div class="ep-panel-title">Export Settings</div>
+                  <div class="ep-panel-title">High-Quality Export</div>
                   <div class="ep-section">
                     <div class="ep-label">Format</div>
                     <div class="format-tabs" id="formatTabs">
@@ -85,7 +81,7 @@
                       <button class="format-tab active" data-fmt="jpeg">JPEG</button>
                       <button class="format-tab" data-fmt="webp">WebP</button>
                     </div>
-                    <div class="format-hint" id="fmtHint">Lossy · Smallest size · Best for photos</div>
+                    <div class="format-hint" id="fmtHint">Professional format · Small file size · Ideal for photos</div>
                   </div>
                   <div class="ep-section" id="qualitySection">
                     <div class="ep-row">
@@ -119,16 +115,16 @@
             <div class="control-card">
               <h3>Style</h3>
               <div class="mode-toggle">
-                <button class="mode-btn active" data-mode="blur">Blur Frame</button>
-                <button class="mode-btn" data-mode="solid">Solid Color</button>
-                <button class="mode-btn" data-mode="crop">Crop to Fill</button>
+                <button class="mode-btn active" data-mode="blur">Dynamic Blur</button>
+                <button class="mode-btn" data-mode="solid">Solid Background</button>
+                <button class="mode-btn" data-mode="crop">Smart Crop</button>
               </div>
             </div>
 
             <div class="control-card" id="blurControls">
               <div class="slider-group">
                 <div class="slider-label">
-                  <span>Blur Amount</span>
+                  <span>Blur Intensity</span>
                   <div class="label-right">
                     <span id="blurVal">20px</span>
                     <button class="action-reset-btn" data-reset="blur" title="Reset Blur">
@@ -160,7 +156,7 @@
                 <div class="color-swatch" role="button" tabindex="0" aria-label="Navy" style="background:#1E2382;" data-color="#1E2382"></div>
               </div>
               <div class="slider-group">
-                <div class="slider-label"><span>Custom Color</span></div>
+                <div class="slider-label"><span>Custom Background Color</span></div>
                 <input type="color" id="customColor" value="#ffffff">
               </div>
             </div>
@@ -168,7 +164,7 @@
             <div class="control-card">
               <div class="slider-group">
                 <div class="slider-label">
-                  <span>Border (Padding)</span>
+                  <span>Outer Border (Padding)</span>
                   <div class="label-right">
                     <span id="paddingVal">10%</span>
                     <button class="action-reset-btn" data-reset="padding" title="Reset Padding">
@@ -180,7 +176,7 @@
               </div>
               <div class="slider-group">
                 <div class="slider-label">
-                  <span>Zoom Level</span>
+                  <span>Dynamic Zoom</span>
                   <div class="label-right">
                     <span id="scaleVal">100%</span>
                     <button class="action-reset-btn" data-reset="scale" title="Reset Zoom">
@@ -192,7 +188,7 @@
               </div>
               <div class="slider-group">
                 <div class="slider-label">
-                  <span>Rounded Corners</span>
+                  <span>Edge Smoothness (Radius)</span>
                   <div class="label-right">
                     <span id="radiusVal">0px</span>
                     <button class="action-reset-btn" data-reset="radius" title="Reset Radius">
@@ -206,7 +202,7 @@
 
             <button class="btn-master-reset" id="masterResetBtn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              Reset Options
+              Reset All Settings
             </button>
 
           </aside>
@@ -216,8 +212,8 @@
       <footer>
         <div class="footer-content">
           <div class="footer-brand">
-            <span class="footer-logo">SquarePic</span>
-            <p class="footer-tagline">Simple, private, perfectly framed.</p>
+            <span class="footer-logo">SevenOneLabs SquarePic</span>
+            <p class="footer-tagline">Privacy-first. Perfectly framed. Professional results.</p>
           </div>
           
           <nav class="footer-nav">
@@ -231,12 +227,12 @@
           <div class="footer-trust">
             <div class="privacy-badge">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Privacy First · Local Processing
+              Secure Local Processing · No Cloud Uploads
             </div>
           </div>
         </div>
         <div class="footer-bottom">
-          &copy; 2026 SquarePic &bull; Built with love for creators ❤️
+          &copy; 2026 SevenOneLabs &bull; Empowering creators with private tools ❤️
         </div>
       </footer>
     </section>
