@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://squarepic.sevenonelabs.com/sitemap.xml
