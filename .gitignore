@@ -11,8 +11,8 @@ vite.config.ts
 package.json
 package-lock.json
 
-# ── GitHub Actions (Hostinger deploys directly from Git, no CI needed) ────────
-.github/
+# ── GitHub Actions ──────────────────────────────────────────────────────────
+# (Allowing .github so we can use FTP deployment)
 
 # ── Loose HTML files at root (website lives in public_html/) ─────────────────
 /*.html
