@@ -10,9 +10,13 @@ tsconfig.json
 vite.config.ts
 package.json
 package-lock.json
+server.js
+nodeJS.md
+AGENT_CONTEXT.md
 
 # ── GitHub Actions ──────────────────────────────────────────────────────────
 # (Allowing .github so we can use FTP deployment)
+.github/
 
 # ── Loose HTML files at root (website lives in public_html/) ─────────────────
 /*.html
