@@ -1,13 +1,21 @@
-# ── Dependencies & Build Output ──────────────────────────────────────────────
+# ── Production-Only Repo (.gitignore) ──────────────────────────────────────
+# This repo is configured to only track files required for the website to run.
+
+# Ignore Development Source & Config
+src/
+docs/
+scripts/
+package.json
+package-lock.json
+tsconfig.json
+vite.config.ts
+server.js
 node_modules/
 dist/
 dist-ssr/
 *.local
 
-# ── GitHub Actions ──────────────────────────────────────────────────────────
-.github/
-
-# ── Editor & OS files ─────────────────────────────────────────────────────────
+# Ignore OS & Editor Files
 .vscode/
 .idea/
 .DS_Store
@@ -16,19 +24,5 @@ dist-ssr/
 *.njsproj
 *.sln
 *.sw?
-
-# ── Logs ─────────────────────────────────────────────────────────────────────
 logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# ── Project Assets ──────────────────────────────────────────────────────────
-/public/
-/public_html/assets/
-
-# ── Optional: Keep root clean of loose files if desired ─────────────────────
-# (But keeping .html and .md is recommended for source control)
-# /*.html (Uncomment if you only want to track HTML in public_html)
