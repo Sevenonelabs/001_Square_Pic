@@ -130,3 +130,17 @@ ErrorDocument 403 /index.html
 # 8. Remove Server Signature — Hide Apache/PHP version info
 # ----------------------------------------------------------------
 ServerSignature Off
+
+
+# ----------------------------------------------------------------
+# 9. Clean URLs — Serve file.html when user visits /file
+# ----------------------------------------------------------------
+
+# Redirect /file.html to /file (301)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+# Internally serve file.html for /file
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
