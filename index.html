@@ -42,15 +42,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/main-V4tJZQAw.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-CoZW830_.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script type="module" crossorigin src="/assets/main-CUCgnlVx.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-vt2whkm3.css">
   </head>
   <body>
 
     <header>
       <div class="header-left">
-        <a href="index.html" class="logo" style="text-decoration:none;">SquarePic</a>
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Tools Navigation">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="/" class="logo" style="text-decoration:none;">SquarePic</a>
       </div>
       
       <div class="header-center-title">
@@ -76,6 +84,7 @@
         </div>
       </div>
     </header>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
     <!-- ═══════════════════ LANDING SECTION ═══════════════════ -->
     <section id="landing-section" aria-label="SquarePic product overview">
@@ -87,6 +96,39 @@
     <section id="tool-section" aria-label="Photo editor">
       <main>
         <section id="editor">
+          <!-- ── Left Sidebar: Tool Suite Navigation ──────────────── -->
+          <aside class="sidebar-left">
+            <div class="control-card">
+              <h3>Core Tools</h3>
+              <nav class="sidebar-nav">
+                <a href="square-image-tool.html" class="sidebar-link active">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                  Square Image Tool
+                </a>
+                <a href="image-resizer.html" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                  Image Resizer
+                </a>
+                <a href="photo-cropper.html" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path></svg>
+                  Photo Cropper
+                </a>
+                <a href="image-compressor.html" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11V4h7"></path><path d="M4 13v7h7"></path><path d="M20 11V4h-7"></path><path d="M20 13v7h-7"></path></svg>
+                  Image Compressor
+                </a>
+                <a href="resize-image-without-losing-quality.html" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  High Quality Resizer
+                </a>
+                <a href="free-online-photo-resizer.html" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                  Free Photo Resizer
+                </a>
+              </nav>
+            </div>
+          </aside>
+
           <div class="preview-area" id="previewContainer">
             <canvas id="mainCanvas" style="display: none;"></canvas>
             <div id="dropZone" class="drop-zone" style="border: none; background: transparent; width: 100%; height: 100%; display: flex; justify-content: center;">
@@ -311,11 +353,11 @@
           </div>
           
           <nav class="footer-nav">
-            <a href="about.html" class="sheet-trigger">About</a>
-            <a href="support.html" class="sheet-trigger">Support</a>
-            <a href="faq.html" class="sheet-trigger">FAQ</a>
-            <a href="privacy.html" class="sheet-trigger">Privacy</a>
-            <a href="terms.html" class="sheet-trigger">Terms</a>
+            <a href="about" class="sheet-trigger">About</a>
+            <a href="support" class="sheet-trigger">Support</a>
+            <a href="faq" class="sheet-trigger">FAQ</a>
+            <a href="privacy" class="sheet-trigger">Privacy</a>
+            <a href="terms" class="sheet-trigger">Terms</a>
           </nav>
 
           <div class="footer-trust" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
@@ -329,7 +371,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          &copy; 2026 SquarePic &bull; Built for creators. Free for everyone.
+          &copy; 2026 SquarePic - Free online square image maker. Built for Creators with ❤️
         </div>
       </footer>
     </section>
@@ -343,7 +385,8 @@
       </div>
       <div id="sheetContent" class="sheet-content"></div>
     </div>
-
+
+
 
   </body>
 </html>
