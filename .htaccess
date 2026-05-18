@@ -5,11 +5,20 @@
 
 
 # ----------------------------------------------------------------
-# 1. Force HTTPS — redirect all HTTP traffic to HTTPS
+# 1. Force HTTPS & Extension-less URLs
 # ----------------------------------------------------------------
 RewriteEngine On
+RewriteBase /
+
+# Force HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Support extension-less URLs (e.g., /about -> /about.html)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
 
 
 # ----------------------------------------------------------------
