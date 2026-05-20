@@ -208,6 +208,11 @@
         background: var(--surface-mid) !important;
         box-shadow: 0 0 20px var(--accent-glow);
       }
+      #compressor-tool.drag-over {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 24px var(--accent-glow) !important;
+        background: rgba(255, 255, 255, 0.02) !important;
+      }
       .converter-drop-zone .upload-icon {
         width: 48px;
         height: 48px;
@@ -272,7 +277,7 @@
         <div id="compressor-tool" class="converter-card" style="margin: 2rem 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); position: relative; overflow: visible;">
           
           <!-- Drop & Select Zone -->
-          <div id="compressor-drop-zone" class="converter-drop-zone">
+          <div id="compressor-drop-zone" class="converter-drop-zone" style="display: none;">
             <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
             </svg>
@@ -282,8 +287,8 @@
             <input type="file" id="compressor-file-input" multiple accept="image/*" style="display: none;">
           </div>
 
-          <!-- Files List Container (Initially Hidden) -->
-          <div id="compressor-workspace" style="display: none;">
+          <!-- Files List Container -->
+          <div id="compressor-workspace" style="display: block;">
             
             <!-- Two Column Layout for Compressor Workspace -->
             <div class="compressor-workspace-layout" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
@@ -303,7 +308,7 @@
                     <span style="font-size: 0.8rem; color: var(--text-muted);">Compression Level:</span>
                     <span id="slider-value-label" style="font-size: 0.85rem; color: var(--accent); font-weight: 700;">60%</span>
                   </div>
-                  <input type="range" id="quality-slider" min="5" max="95" value="60" style="width: 100%; height: 4px; border-radius: 2px;">
+                  <input type="range" id="quality-slider" min="5" max="95" value="60">
                   <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.3;">Lower quality yields smaller file sizes. 60% offers the best balance of quality and size.</p>
                 </div>
                 
