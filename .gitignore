@@ -1,19 +1,9 @@
-# ── Production-Only Repo (.gitignore) ──────────────────────────────────────
-# This repo is configured to only track files required for the website to run.
-
-# Ignore Development Source & Config
-src/
-docs/
-scripts/
-package.json
-package-lock.json
-tsconfig.json
-vite.config.ts
-server.js
+# Ignore build outputs & dependencies
 node_modules/
 dist/
 dist-ssr/
 *.local
+
 
 # Ignore OS & Editor Files
 .vscode/
