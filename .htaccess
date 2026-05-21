@@ -5,11 +5,22 @@
 
 
 # ----------------------------------------------------------------
-# 1. Force HTTPS — redirect all HTTP traffic to HTTPS
+# 1. Force HTTPS & Clean URLs (.html extension removal)
 # ----------------------------------------------------------------
 RewriteEngine On
+
+# Force HTTPS — redirect all HTTP traffic to HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect direct requests for .html files to their clean URL (remove .html)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+)\.html[\s?] [NC]
+RewriteRule ^(.*)\.html$ /$1 [R=301,L,NE]
+
+# Rewrite clean URL requests internally to their .html counterpart
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
 
 
 # ----------------------------------------------------------------
