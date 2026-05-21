@@ -99,11 +99,15 @@
       .converter-drop-zone {
         border: 2px dashed var(--border-color);
         border-radius: var(--radius-lg);
-        padding: 3.5rem 1.5rem;
+        padding: 3rem 1.5rem;
         text-align: center;
         cursor: pointer;
         transition: var(--transition);
         background: rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
       }
       .converter-drop-zone:hover {
         border-color: var(--accent) !important;
@@ -118,11 +122,12 @@
       .converter-drop-zone .upload-icon {
         width: 48px;
         height: 48px;
-        margin: 0 auto 1.25rem;
+        margin: 0 0 1.25rem;
         color: var(--accent);
         opacity: 0.85;
         transition: var(--transition);
         display: block;
+        flex-shrink: 0;
       }
       .converter-drop-zone h3 {
         font-size: 1.35rem;
@@ -145,6 +150,15 @@
         padding: 0.6rem 1.75rem;
         font-size: 0.95rem;
         color: #000000 !important;
+        flex-shrink: 0;
+      }
+      @media (max-width: 500px) {
+        .converter-drop-zone {
+          padding: 2rem 1rem;
+        }
+        .converter-drop-zone h3 { font-size: 1.1rem; }
+        .converter-drop-zone p { font-size: 0.82rem; }
+        .converter-drop-zone button { padding: 0.55rem 1.25rem; font-size: 0.85rem; }
       }
       
       /* Compact responsive side-by-side mode */
@@ -606,7 +620,7 @@
           <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
             Shrink the size of your images safely and locally with our high-performance compressor tool.
           </p>
-          <a href="free-image-compressor.html" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none; color: #ffffff !important;">Go to Compressor</a>
+          <a href="free-image-compressor" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none; color: #ffffff !important;">Go to Compressor</a>
         </div>
 
       </section>

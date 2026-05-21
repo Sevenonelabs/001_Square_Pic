@@ -997,22 +997,23 @@ footer {
   margin: auto;
   text-align: center;
   padding: 1rem;
-  overflow-y: auto;
-  max-height: 100%;
+  /* No overflow or max-height — let the page scroll naturally */
 }
 
-/* ── SEO Links Bar ───────────────────────────────────────── */
-.seo-links-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.5rem 1rem;
-  background: #050608;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  flex-wrap: wrap;
+/* When main contains a legal/SEO page, don't constrain to viewport height */
+main:has(.legal-content) {
+  min-height: unset;
+  align-items: flex-start;
+  padding: 2rem 1rem 1rem;
 }
 
+@media (max-width: 600px) {
+  main:has(.legal-content) {
+    padding: 1.25rem 0.75rem 0.75rem;
+  }
+}
+
+/* ── SEO Links Bar (shared link styles) ─────────────────── */
 .seo-links-bar a {
   color: var(--text-muted);
   text-decoration: none;
@@ -1025,12 +1026,6 @@ footer {
 
 .seo-links-bar a:hover {
   color: var(--accent);
-}
-
-@media (max-width: 800px) {
-  .seo-links-bar {
-    gap: 1rem;
-  }
 }
 
 /* ── Tables ──────────────────────────────────────────────── */
@@ -2400,7 +2395,7 @@ tr:last-child td {
 /* ── SEO Links Bar (Footer) ─────────────────────────────── */
 .seo-links-bar {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1.5rem;
   padding: 2rem 1.5rem;
   background: transparent;
@@ -2408,6 +2403,23 @@ tr:last-child td {
   max-width: 1200px;
   margin: 2rem auto;
   box-sizing: border-box;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .seo-links-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .seo-links-bar {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 .seo-category {

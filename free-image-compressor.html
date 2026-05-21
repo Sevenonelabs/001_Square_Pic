@@ -192,11 +192,15 @@
       .converter-drop-zone {
         border: 2px dashed var(--border-color);
         border-radius: var(--radius-lg);
-        padding: 3.5rem 1.5rem;
+        padding: 3rem 1.5rem;
         text-align: center;
         cursor: pointer;
         transition: var(--transition);
         background: rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
       }
       .converter-drop-zone:hover {
         border-color: var(--accent) !important;
@@ -216,11 +220,12 @@
       .converter-drop-zone .upload-icon {
         width: 48px;
         height: 48px;
-        margin: 0 auto 1.25rem;
+        margin: 0 0 1.25rem;
         color: var(--accent);
         opacity: 0.85;
         transition: var(--transition);
         display: block;
+        flex-shrink: 0;
       }
       .converter-drop-zone h3 {
         font-size: 1.35rem;
@@ -243,6 +248,22 @@
         padding: 0.6rem 1.75rem;
         font-size: 0.95rem;
         color: #000000 !important;
+        flex-shrink: 0;
+      }
+      @media (max-width: 500px) {
+        .converter-drop-zone {
+          padding: 2rem 1rem;
+        }
+        .converter-drop-zone h3 {
+          font-size: 1.1rem;
+        }
+        .converter-drop-zone p {
+          font-size: 0.82rem;
+        }
+        .converter-drop-zone button {
+          padding: 0.55rem 1.25rem;
+          font-size: 0.85rem;
+        }
       }
       
       @media (min-width: 768px) {
