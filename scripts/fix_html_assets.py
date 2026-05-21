@@ -1,11 +1,18 @@
 import os
 import re
 
-dir_path = r"c:\Users\shiva\Documents\Google AG\01_Seven_One_Labs\01_SquarePic_Final\Phase 1"
+# Compute workspace path dynamically relative to this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dir_path = os.path.dirname(script_dir)
 
 # Regex patterns for the hardcoded build assets
-script_pattern = re.compile(r'<script type="module" crossorigin src="/assets/main-[A-Za-z0-9_-]+\.js"></script>')
-link_pattern = re.compile(r'<link rel="stylesheet" crossorigin href="/assets/main-[A-Za-z0-9_-]+\.css">')
+main_script_pattern = re.compile(r'<script type="module" crossorigin src="/assets/main-[A-Za-z0-9_-]+\.js"></script>')
+compressor_script_pattern = re.compile(r'<script type="module" crossorigin src="/assets/free-image-compressor-[A-Za-z0-9_-]+\.js"></script>')
+converter_script_pattern = re.compile(r'<script type="module" crossorigin src="/assets/free-image-converter-[A-Za-z0-9_-]+\.js"></script>')
+
+# Pattern for stylesheet and preload tags referencing /assets/
+css_pattern = re.compile(r'<link rel="stylesheet" crossorigin href="/assets/[A-Za-z0-9_-]+\.css">')
+preload_pattern = re.compile(r'<link rel="modulepreload" crossorigin href="/assets/[A-Za-z0-9_-]+\.js">')
 
 # Pattern for fixing internal links (removing .html)
 html_link_pattern = re.compile(r'href="([^"]+)\.html"')
@@ -18,10 +25,14 @@ for filename in os.listdir(dir_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # Replace build assets
-        # We replace the script and remove the link because main.ts imports style.css
-        new_content = script_pattern.sub('<script type="module" src="/src/main.ts"></script>', content)
-        new_content = link_pattern.sub('', new_content)
+        # Replace build assets with source files
+        new_content = main_script_pattern.sub('<script type="module" src="/src/main.ts"></script>', content)
+        new_content = compressor_script_pattern.sub('<script type="module" src="/src/compressor.ts"></script>', new_content)
+        new_content = converter_script_pattern.sub('<script type="module" src="/src/converter.ts"></script>', new_content)
+        
+        # Remove built CSS link tags and preload tags
+        new_content = css_pattern.sub('', new_content)
+        new_content = preload_pattern.sub('', new_content)
         
         # Clean internal links (e.g. about.html -> about)
         # We avoid touching external links by checking for http/https
