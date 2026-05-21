@@ -16,3 +16,13 @@ dist-ssr/
 *.sw?
 logs/
 *.log
+
+# Ignore development source files and configs not needed to run the website
+src/
+docs/
+scripts/
+tsconfig.json
+package.json
+package-lock.json
+vite.config.ts
+server.js
