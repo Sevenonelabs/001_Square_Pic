@@ -1,0 +1,143 @@
+# ================================================================
+#  SquarePic — Apache Security Configuration (.htaccess)
+#  Place this file in your public_html root on Hostinger
+# ================================================================
+
+
+# ----------------------------------------------------------------
+# 1. Force HTTPS & Clean URLs (.html extension removal)
+# ----------------------------------------------------------------
+RewriteEngine On
+
+# Force HTTPS — redirect all HTTP traffic to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect direct requests for .html files to their clean URL (remove .html)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+)\.html[\s?] [NC]
+RewriteRule ^(.*)\.html$ /$1 [R=301,L,NE]
+
+# Rewrite clean URL requests internally to their .html counterpart
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+
+# ----------------------------------------------------------------
+# 2. Security Headers
+# ----------------------------------------------------------------
+<IfModule mod_headers.c>
+
+  # HSTS — tell browsers to always use HTTPS for 1 year
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Clickjacking protection — prevent your site being loaded in an iframe
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Prevent MIME-type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Referrer Policy — only send referrer to same origin
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions Policy — disable unused browser features
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # XSS Protection (legacy browsers)
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Content Security Policy — restrict where resources can load from
+  # Allows: self, Google Fonts, inline styles (needed for Vite)
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' blob: data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+</IfModule>
+
+
+# ----------------------------------------------------------------
+# 3. Disable Directory Listing
+# ----------------------------------------------------------------
+Options -Indexes
+
+
+# ----------------------------------------------------------------
+# 4. Block Access to Sensitive Files & Folders
+# ----------------------------------------------------------------
+
+# Block .git directory entirely
+RedirectMatch 404 /\.git
+
+# Block hidden files (starting with dot), except .well-known (needed for SSL)
+<FilesMatch "^\.(?!well-known)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Block access to sensitive config/source files
+<FilesMatch "\.(env|log|json|lock|ts|tsx|md|yaml|yml|sh|sql)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Explicitly allow package.json to stay blocked (already caught above)
+# Allow sitemap and robots explicitly
+<Files "sitemap.xml">
+  Order allow,deny
+  Allow from all
+</Files>
+<Files "robots.txt">
+  Order allow,deny
+  Allow from all
+</Files>
+
+
+# ----------------------------------------------------------------
+# 5. Caching — Speed Up Repeat Visits
+# ----------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML — no cache (always fresh)
+  ExpiresByType text/html                "access plus 0 seconds"
+
+  # CSS & JS — cache for 1 year (Vite fingerprints filenames)
+  ExpiresByType text/css                 "access plus 1 year"
+  ExpiresByType application/javascript   "access plus 1 year"
+
+  # Images — cache for 6 months
+  ExpiresByType image/webp               "access plus 6 months"
+  ExpiresByType image/png                "access plus 6 months"
+  ExpiresByType image/jpeg               "access plus 6 months"
+  ExpiresByType image/svg+xml            "access plus 6 months"
+  ExpiresByType image/x-icon             "access plus 1 year"
+
+  # Fonts — cache for 1 year
+  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType font/woff                "access plus 1 year"
+</IfModule>
+
+
+# ----------------------------------------------------------------
+# 6. Enable Gzip Compression — Smaller Files = Faster Load
+# ----------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff2
+  AddOutputFilterByType DEFLATE font/woff
+</IfModule>
+
+
+# ----------------------------------------------------------------
+# 7. Custom Error Pages (optional — create these files if needed)
+# ----------------------------------------------------------------
+ErrorDocument 404 /index.html
+ErrorDocument 403 /index.html
+
+
+# ----------------------------------------------------------------
+# 8. Remove Server Signature — Hide Apache/PHP version info
+# ----------------------------------------------------------------
+ServerSignature Off
