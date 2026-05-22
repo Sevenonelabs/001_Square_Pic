@@ -17,6 +17,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+)\.html[\s?] [NC]
 RewriteRule ^(.*)\.html$ /$1 [R=301,L,NE]
 
+# Canonical 301 redirects — fix URLs that were indexed with wrong paths
+RewriteRule ^image-converter/?$ /free-image-converter [R=301,L,NE]
+
 # Rewrite clean URL requests internally to their .html counterpart
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
@@ -133,8 +136,8 @@ RedirectMatch 404 /\.git
 # ----------------------------------------------------------------
 # 7. Custom Error Pages (optional — create these files if needed)
 # ----------------------------------------------------------------
-ErrorDocument 404 /index.html
-ErrorDocument 403 /index.html
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
 
 
 # ----------------------------------------------------------------
