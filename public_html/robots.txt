@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /public_html/
 
 Sitemap: https://squarepic.io/sitemap.xml
