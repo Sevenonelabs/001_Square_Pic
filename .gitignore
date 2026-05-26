@@ -4,6 +4,10 @@ dist/
 dist-ssr/
 *.local
 
+# Duplicate/legacy directories
+public_html/
+public/
+scratch/
 
 # Ignore OS & Editor Files
 .vscode/

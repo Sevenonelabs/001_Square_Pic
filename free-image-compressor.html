@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TTBK0ZDM5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9TTBK0ZDM5');
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self';"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com;"/>
     <title>Image Compressor | Reduce Photo File Size Online | SquarePic</title>
     <meta name="description" content="Compress JPG, PNG, and WebP images online without losing quality. Reduce file sizes for faster website loading and easier sharing." />
     <link rel="canonical" href="https://squarepic.io/free-image-compressor" />
@@ -102,8 +111,11 @@
     <meta property="og:title" content="Image Compressor | Reduce Photo File Size Online | SquarePic" />
     <meta property="og:description" content="Compress JPG, PNG, and WebP images online without losing quality. Reduce file sizes for faster website loading and easier sharing." />
     <meta property="og:image" content="https://squarepic.io/squareframe_preview.png" />
-    
-
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://squarepic.io/free-image-compressor" />
+    <meta property="twitter:title" content="Image Compressor | Reduce Photo File Size Online | SquarePic" />
+    <meta property="twitter:description" content="Compress JPG, PNG, and WebP images online without losing quality. Reduce file sizes for faster website loading and easier sharing." />
+    <meta property="twitter:image" content="https://squarepic.io/squareframe_preview.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -304,11 +316,12 @@
         </div>
 
         <!-- Interactive Multi-File Image Compressor Tool -->
-        <div id="compressor-tool" class="converter-card" style="margin: 2rem 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); position: relative; overflow: visible;">
+        <div id="compressor-tool" class="converter-card" style="margin: 2rem 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); position: relative; overflow: visible; transition: all 0.3s ease;">
           
           <!-- Drop & Select Zone -->
           <div id="compressor-drop-zone" class="converter-drop-zone" style="display: none;">
-            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="compressor-upload-title">
+              <title id="compressor-upload-title">Upload Image to Compress</title>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
             </svg>
             <h3 id="drop-zone-title">Drag & Drop Images</h3>
