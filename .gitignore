@@ -21,6 +21,15 @@ scratch/
 logs/
 *.log
 
+# Ignore opencode agent config & skills
+.agents/
+.opencode/
+opencode.json
+skills-lock.json
+
+# Ignore CI/CD
+.github/
+
 # Ignore development source files and configs not needed to run the website
 src/
 docs/
