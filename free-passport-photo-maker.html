@@ -134,10 +134,44 @@
     <link rel="stylesheet" crossorigin href="/assets/main-BR6Cg8l4.css">
   </head>
   <body>
+    <a href="#tool-section" class="skip-link" style="position:absolute;top:-100px;left:8px;z-index:10000;padding:8px 16px;background:var(--accent);color:#000;border-radius:0 0 8px 8px;font-weight:700;font-size:0.85rem;text-decoration:none;transition:top 0.2s;">Skip to Tool</a>
+
     <header>
-      <a href="/" class="logo" style="text-decoration: none;">SquarePic</a>
-      <a href="/" class="btn-secondary" style="width: auto; padding: 0.4rem 1rem; color: #ffffff !important;">Go to Editor</a>
+      <div class="header-left">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Tools Navigation">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="/" class="logo" style="text-decoration:none;">SquarePic</a>
+      </div>
+      
+      <div class="header-center-title">
+        Free <span class="lp-accent">Passport Photo</span> Maker
+      </div>
+
+      <div class="header-right">
+        <div class="header-nav">
+          <div class="nav-trust-badges">
+            <span class="badge-item"><span class="badge-check">✓</span> 100% Free</span>
+            <span class="badge-item"><span class="badge-check">✓</span> No Watermarks</span>
+            <span class="badge-item"><span class="badge-check">✓</span> Privacy-First</span>
+          </div>
+        </div>
+        <div class="theme-picker" id="themePicker" aria-label="Choose accent color">
+          <span class="theme-label">Theme</span>
+          <button class="theme-dot" data-accent="#84cc16" data-glow="rgba(132,204,22,0.3)" style="background:#84cc16" title="Lime" aria-label="Lime theme"></button>
+          <button class="theme-dot" data-accent="#10b981" data-glow="rgba(16,185,129,0.3)" style="background:#10b981" title="Emerald" aria-label="Emerald theme"></button>
+          <button class="theme-dot active" data-accent="#06b6d4" data-glow="rgba(6,182,212,0.3)" style="background:#06b6d4" title="Cyan" aria-label="Cyan theme"></button>
+          <button class="theme-dot" data-accent="#8b5cf6" data-glow="rgba(139,92,246,0.3)" style="background:#8b5cf6" title="Violet" aria-label="Violet theme"></button>
+          <button class="theme-dot" data-accent="#f43f5e" data-glow="rgba(244,63,94,0.3)" style="background:#f43f5e" title="Rose" aria-label="Rose theme"></button>
+          <button class="theme-dot" data-accent="#f59e0b" data-glow="rgba(245,158,11,0.3)" style="background:#f59e0b" title="Amber" aria-label="Amber theme"></button>
+        </div>
+      </div>
     </header>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
     <main>
       <section class="content-section legal-content" style="max-width: 800px;">
 
@@ -158,10 +192,211 @@
           <span class="legal-badge">Instant Download</span>
         </div>
 
-        <!-- Tool Preview Section -->
-        <div style="margin: 3rem 0; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border-color); background: var(--surface-color); padding: 1rem;">
-          <img src="/squareframe_preview.png" alt="SquarePic interface showing a passport photo being formatted" style="width: 100%; height: auto; border-radius: var(--radius-lg); display: block;" />
-        </div>
+        <!-- ═══════════════════ TOOL SECTION ══════════════════════ -->
+        </section>
+    </main>
+    <section id="tool-section" aria-label="Photo editor">
+      <main>
+        <section id="editor">
+          <!-- ── Left Sidebar: Tool Suite Navigation ──────────────── -->
+          <aside class="sidebar-left">
+            <div class="sidebar-trust-badges" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem;">
+              <span class="badge-item" style="font-size: 0.72rem; padding: 0.35rem 0.6rem;"><span class="badge-check">✓</span> Free</span>
+              <span class="badge-item" style="font-size: 0.72rem; padding: 0.35rem 0.6rem;"><span class="badge-check">✓</span> No Watermarks</span>
+              <span class="badge-item" style="font-size: 0.72rem; padding: 0.35rem 0.6rem; white-space: normal;"><span class="badge-check">✓</span> Privacy-First Local Processing</span>
+            </div>
+            <div class="control-card">
+              <h3>Core Tools</h3>
+              <nav class="sidebar-nav">
+                <a href="index" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                  Free Square Image Tool
+                </a>
+                <a href="free-image-converter" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                  Free Image Converter
+                </a>
+                <a href="free-image-compressor" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6v6"></path><path d="M20 10h-6V4"></path><path d="M14 10l7-7"></path><path d="M10 14l-7 7"></path></svg>
+                  Free Image Compressor
+                </a>
+                <a href="free-image-resizer" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                  Free Image Resizer
+                </a>
+                <a href="free-photo-cropper" class="sidebar-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path></svg>
+                  Free Photo Cropper
+                </a>
+              </nav>
+            </div>
+          </aside>
+
+          <div class="preview-area" id="previewContainer">
+            <canvas id="mainCanvas" style="display: none;"></canvas>
+            <div id="loadingSkeleton" class="loading-skeleton" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center;">
+              <div style="width: 80%; height: 80%; border-radius: var(--radius-lg); background: linear-gradient(90deg, var(--surface-color) 25%, var(--surface-mid) 50%, var(--surface-color) 75%); background-size: 200% 100%; animation: skeletonShimmer 1.5s infinite;"></div>
+            </div>
+            <div id="dropZone" class="drop-zone" style="border: none; background: transparent; width: 100%; height: 100%; display: flex; justify-content: center;">
+              <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin-bottom: 1rem;" role="img" aria-labelledby="uploadIconTitle">
+                <title id="uploadIconTitle">Upload Image Icon</title>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--text-main);">Free Passport Photo Maker</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; max-width: 80%;">Format your portrait to exact passport and visa dimensions. Add white backgrounds and export at full quality for official documents.</p>
+              <button class="btn-primary" id="uploadBtn" style="width: auto;">Upload Your Image</button>
+              <input type="file" id="fileInput" hidden accept="image/*">
+            </div>
+          </div>
+
+          <aside class="controls">
+            <div class="action-btns">
+              <div class="ep-wrapper" id="exportDropdownContainer">
+                <button class="btn-primary export-trigger" id="downloadBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Export Perfect Square
+                </button>
+                <div class="export-panel" id="exportMenu">
+                  <div class="ep-panel-title">High-Quality Export</div>
+                  <div class="ep-section">
+                    <div class="ep-label">Format</div>
+                    <div class="format-tabs" id="formatTabs">
+                      <button class="format-tab" data-fmt="png">PNG</button>
+                      <button class="format-tab active" data-fmt="jpeg">JPEG</button>
+                      <button class="format-tab" data-fmt="webp">WebP</button>
+                    </div>
+                    <div class="format-hint" id="fmtHint">Professional format · Small file size · Ideal for photos</div>
+                  </div>
+                  <div class="ep-section" id="qualitySection">
+                    <div class="ep-row">
+                      <span class="ep-label">Quality</span>
+                      <span id="exportQualityVal" class="ep-quality-val">90%</span>
+                    </div>
+                    <div class="ep-slider-wrap">
+                      <input type="range" id="exportQuality" min="10" max="100" value="90" aria-label="Export quality">
+                    </div>
+                  </div>
+                  <div class="ep-info-card">
+                    <div class="ep-info-row">
+                      <span class="ep-info-label">Dimensions</span>
+                      <span id="exportDimensions" class="ep-info-val">--</span>
+                    </div>
+                    <div class="ep-info-divider"></div>
+                    <div class="ep-info-row">
+                      <span class="ep-info-label">Est. File Size</span>
+                      <span id="exportSizeEst" class="ep-info-val ep-size-val">--</span>
+                    </div>
+                  </div>
+                  <button class="save-btn" id="confirmExportBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Final Image
+                  </button>
+                </div>
+              </div>
+              <button class="btn-secondary" id="uploadNewBtn">Create Another Square Image</button>
+            </div>
+
+            <div class="control-card">
+              <h3>Style</h3>
+              <div class="mode-toggle">
+                <button class="mode-btn active" data-mode="blur">Dynamic Blur</button>
+                <button class="mode-btn" data-mode="solid">Solid Background</button>
+                <button class="mode-btn" data-mode="crop">Smart Crop</button>
+              </div>
+            </div>
+
+            <div class="control-card" id="blurControls">
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Blur Intensity</span>
+                  <div class="label-right">
+                    <span id="blurVal">20px</span>
+                    <button class="action-reset-btn" data-reset="blur" title="Reset Blur">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <input type="range" id="blurSlider" min="0" max="100" value="20" aria-label="Blur intensity">
+              </div>
+            </div>
+
+            <div class="control-card" id="solidControls" style="display: none;">
+              <div class="color-grid">
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Dark Charcoal" style="background:#1E2328;" data-color="#1E2328"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Slate Gray" style="background:#787D82;" data-color="#787D82"></div>
+                <div class="color-swatch active" role="button" tabindex="0" aria-label="Ice White" style="background:#F0F5FA;" data-color="#F0F5FA"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Peach" style="background:#F0CDB4;" data-color="#F0CDB4"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Gold" style="background:#B49B5A;" data-color="#B49B5A"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Red" style="background:#F02328;" data-color="#F02328"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Orange" style="background:#F07D28;" data-color="#F07D28"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Yellow" style="background:#F0F528;" data-color="#F0F528"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Green" style="background:#1EF528;" data-color="#1EF528"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Sky Blue" style="background:#50C3FA;" data-color="#50C3FA"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Blue" style="background:#1E23FA;" data-color="#1E23FA"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Purple" style="background:#8C23FA;" data-color="#8C23FA"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Pink" style="background:#F055C8;" data-color="#F055C8"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Dark Red" style="background:#782328;" data-color="#782328"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Olive" style="background:#B4B928;" data-color="#B4B928"></div>
+                <div class="color-swatch" role="button" tabindex="0" aria-label="Navy" style="background:#1E2382;" data-color="#1E2382"></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label"><span>Custom Background Color</span></div>
+                <input type="color" id="customColor" value="#F0F5FA" aria-label="Custom background color">
+              </div>
+            </div>
+
+            <div class="control-card">
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Outer Border (Padding)</span>
+                  <div class="label-right">
+                    <span id="paddingVal">10%</span>
+                    <button class="action-reset-btn" data-reset="padding" title="Reset Padding">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <input type="range" id="paddingSlider" min="0" max="40" value="10" aria-label="Outer border padding">
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Dynamic Zoom</span>
+                  <div class="label-right">
+                    <span id="scaleVal">100%</span>
+                    <button class="action-reset-btn" data-reset="scale" title="Reset Zoom">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <input type="range" id="scaleSlider" min="50" max="200" value="100" aria-label="Dynamic zoom">
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Edge Smoothness (Radius)</span>
+                  <div class="label-right">
+                    <span id="radiusVal">0px</span>
+                    <button class="action-reset-btn" data-reset="radius" title="Reset Radius">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <input type="range" id="radiusSlider" min="0" max="100" value="0" aria-label="Edge smoothness radius">
+              </div>
+            </div>
+
+            <button class="btn-master-reset" id="masterResetBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Reset All Settings
+            </button>
+
+          </aside>
+        </section>
+      </main>
+    </section>
+    <!-- ══════════════════ END TOOL ═════════════════════════── -->
+
+    <main>
+      <section class="content-section legal-content" style="max-width: 800px;">
 
         <!-- How It Works Section -->
         <div class="legal-section">

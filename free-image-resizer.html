@@ -14,7 +14,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#080a0e" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com;"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;"/>
     <title>Image Resizer | Resize Images Online Free | SquarePic</title>
     <meta name="description" content="Resize your images online for free without losing quality. Perfect for social media, creators, and business. No signup required." />
     <link rel="canonical" href="https://squarepic.io/free-image-resizer" />
@@ -130,7 +130,6 @@
 
     
     
-    <script type="module" crossorigin src="/assets/main-BzemtNzi.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/main-BR6Cg8l4.css">
   </head>
   <body>
@@ -147,8 +146,396 @@
           Resizing images shouldn't be a hassle. With our free online image resizer, you can format, scale, and perfectly frame your photos in seconds without losing quality or dealing with complicated software.
         </p>
         
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <a href="/" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none;">Upload Image</a>
+        <style>
+          .rs-tool {
+            --rs-radius: 8px;
+            --rs-bg: var(--surface-color, #ffffff0a);
+            --rs-border: var(--border-color, #ffffff14);
+            --rs-text: var(--text-main, #e8edf3);
+            --rs-muted: var(--text-muted, #8a9aaa);
+            --rs-accent: var(--accent, #06b6d4);
+            width: 100%;
+            margin: 2rem 0;
+          }
+          .rs-dropzone {
+            border: 2px dashed var(--rs-border);
+            border-radius: var(--rs-radius);
+            background: var(--rs-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            position: relative;
+          }
+          .rs-dropzone:hover,
+          .rs-dropzone.drag-over {
+            border-color: var(--rs-accent);
+            background: color-mix(in srgb, var(--rs-accent) 8%, var(--rs-bg));
+          }
+          .rs-upload-icon {
+            width: 48px;
+            height: 48px;
+            color: var(--rs-accent);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+          }
+          .rs-dropzone-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            color: var(--rs-text);
+          }
+          .rs-dropzone-text {
+            font-size: 0.95rem;
+            color: var(--rs-muted);
+            margin-bottom: 0.3rem;
+          }
+          .rs-dropzone-formats {
+            font-size: 0.78rem;
+            color: var(--rs-muted);
+            opacity: 0.7;
+          }
+          .rs-editor-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+          }
+          .rs-canvas-area {
+            background: #000;
+            border-radius: var(--rs-radius);
+            overflow: hidden;
+            border: 1px solid var(--rs-border);
+            position: relative;
+          }
+          .rs-upload-overlay {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            cursor: pointer;
+            border: 2px dashed var(--rs-border);
+            border-radius: var(--rs-radius);
+            background: var(--rs-bg);
+            transition: border-color 0.2s, background 0.2s;
+            z-index: 2;
+          }
+          .rs-upload-overlay:hover,
+          .rs-upload-overlay.drag-over {
+            border-color: var(--rs-accent);
+            background: color-mix(in srgb, var(--rs-accent) 8%, var(--rs-bg));
+          }
+          .rs-canvas-container {
+            width: 100%;
+            aspect-ratio: 5 / 4;
+            min-height: 300px;
+            position: relative;
+            cursor: default;
+            touch-action: none;
+          }
+          .rs-canvas-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+          .rs-canvas-info {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.6rem;
+            background: var(--rs-bg);
+            border-top: 1px solid var(--rs-border);
+            font-size: 0.78rem;
+            color: var(--rs-muted);
+          }
+          .rs-btn-icon {
+            background: none;
+            border: 1px solid var(--rs-border);
+            color: var(--rs-text);
+            width: 26px;
+            height: 26px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            line-height: 1;
+          }
+          .rs-btn-icon:hover {
+            background: var(--surface-hover, #ffffff1a);
+          }
+          .rs-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .rs-section {
+            background: var(--rs-bg);
+            border: 1px solid var(--rs-border);
+            border-radius: var(--rs-radius);
+            padding: 1rem;
+          }
+          .rs-section h4 {
+            font-size: 0.82rem;
+            color: var(--rs-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          .rs-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+          }
+          .rs-section-header h4 {
+            margin-bottom: 0;
+          }
+          .rs-badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            background: var(--rs-accent);
+            color: #000;
+            border-radius: 3px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+          }
+          .rs-platform-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 0.75rem;
+          }
+          .rs-platform-tab {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            background: transparent;
+            border: 1px solid var(--rs-border);
+            color: var(--rs-muted);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-family: inherit;
+          }
+          .rs-platform-tab:hover {
+            border-color: var(--rs-accent);
+            color: var(--rs-text);
+          }
+          .rs-platform-tab.active {
+            background: var(--rs-accent);
+            color: #000;
+            border-color: var(--rs-accent);
+            font-weight: 600;
+          }
+          .rs-preset-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+          }
+          .rs-preset-btn {
+            font-size: 0.72rem;
+            padding: 0.45rem 0.5rem;
+            background: transparent;
+            border: 1px solid var(--rs-border);
+            color: var(--rs-text);
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.15s;
+            line-height: 1.3;
+            font-family: inherit;
+          }
+          .rs-preset-btn:hover {
+            border-color: var(--rs-accent);
+            background: color-mix(in srgb, var(--rs-accent) 8%, transparent);
+          }
+          .rs-preset-btn.active {
+            border-color: var(--rs-accent);
+            background: color-mix(in srgb, var(--rs-accent) 15%, transparent);
+          }
+          .rs-preset-btn .rs-preset-name {
+            display: block;
+            font-weight: 500;
+          }
+          .rs-preset-btn .rs-preset-meta {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--rs-muted);
+            margin-top: 0.1rem;
+          }
+          .rs-dim-inputs {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          }
+          .rs-dim-field {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+          }
+          .rs-dim-field label {
+            font-size: 0.68rem;
+            color: var(--rs-muted);
+          }
+          .rs-dim-field input {
+            width: 100%;
+            padding: 0.4rem 0.5rem;
+            background: var(--bg-color);
+            border: 1px solid var(--rs-border);
+            border-radius: 4px;
+            color: var(--rs-text);
+            font-size: 0.85rem;
+            font-family: inherit;
+          }
+          .rs-dim-field input:focus {
+            outline: none;
+            border-color: var(--rs-accent);
+          }
+          .rs-dim-sep {
+            color: var(--rs-muted);
+            font-size: 1rem;
+            margin-top: 1.1rem;
+          }
+          .rs-lock {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--rs-muted);
+            margin-top: 0.5rem;
+            cursor: pointer;
+          }
+          .rs-lock input {
+            accent-color: var(--rs-accent);
+          }
+          .rs-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+          .rs-actions .btn-primary,
+          .rs-actions .btn-secondary {
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            padding: 0.7rem 1rem;
+          }
+          .rs-result {
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--rs-border);
+            padding-top: 1rem;
+          }
+          .rs-result h4 {
+            font-size: 0.82rem;
+            color: var(--rs-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          .rs-result-canvas-wrap {
+            background: #000;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            max-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .rs-result-canvas-wrap canvas {
+            max-width: 100%;
+            max-height: 180px;
+            display: block;
+          }
+          .rs-result-info {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--rs-muted);
+          }
+          .rs-result-info span {
+            background: var(--rs-bg);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+          }
+        </style>
+
+        <!-- Interactive Image Resizer Tool -->
+        <div id="resizerTool" class="rs-tool">
+          <div class="rs-editor" id="rsEditor">
+            <div class="rs-editor-layout">
+              <div class="rs-canvas-area">
+                <div class="rs-canvas-container" id="rsCanvasContainer">
+                  <div class="rs-upload-overlay" id="rsUploadOverlay">
+                    <svg class="rs-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <h3 class="rs-dropzone-title">Upload Your Image</h3>
+                    <p class="rs-dropzone-text">Drag & drop or click to browse</p>
+                    <p class="rs-dropzone-formats">JPG &bull; PNG &bull; WebP &bull; 100% private browser processing</p>
+                  </div>
+                  <canvas id="rsCanvas" style="display:none"></canvas>
+                </div>
+                <div class="rs-canvas-info">
+                  <button class="rs-btn-icon" id="rsZoomOut" title="Zoom Out" type="button">−</button>
+                  <span id="rsZoomLevel">100%</span>
+                  <button class="rs-btn-icon" id="rsZoomIn" title="Zoom In" type="button">+</button>
+                  <button class="rs-btn-icon" id="rsFitView" title="Fit to View" type="button">⟷</button>
+                </div>
+              </div>
+
+              <div class="rs-controls">
+                <div class="rs-section">
+                  <div class="rs-section-header">
+                    <h4>Social Media Presets</h4>
+                  </div>
+                  <div class="rs-platform-tabs" id="rsPlatformTabs"></div>
+                  <div class="rs-preset-grid" id="rsPresetGrid"></div>
+                </div>
+
+                <div class="rs-section">
+                  <h4>Custom Dimensions</h4>
+                  <div class="rs-dim-inputs">
+                    <div class="rs-dim-field">
+                      <label for="rsWidth">Width (px)</label>
+                      <input type="number" id="rsWidth" min="1" max="10000">
+                    </div>
+                    <span class="rs-dim-sep">×</span>
+                    <div class="rs-dim-field">
+                      <label for="rsHeight">Height (px)</label>
+                      <input type="number" id="rsHeight" min="1" max="10000">
+                    </div>
+                  </div>
+                  <label class="rs-lock">
+                    <input type="checkbox" id="rsLockAspect" checked>
+                    Lock aspect ratio
+                  </label>
+                </div>
+
+                <div class="rs-actions">
+                  <button class="btn-primary" id="rsApplyBtn">Apply Crop &amp; Resize</button>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+                    <button class="btn-secondary" id="rsDownloadBtn">Download</button>
+                    <button class="btn-secondary" id="rsChangeBtn">Change Image</button>
+                  </div>
+                </div>
+
+                <div class="rs-result" id="rsResult" style="display:none">
+                  <h4>Result Preview</h4>
+                  <div class="rs-result-canvas-wrap">
+                    <canvas id="rsResultCanvas"></canvas>
+                  </div>
+                  <div class="rs-result-info">
+                    <span id="rsResultDims"></span>
+                    <span id="rsResultSize"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="file" id="rsFileInput" hidden accept="image/*">
         </div>
 
         <div class="legal-meta" style="justify-content: center; margin-bottom: 3rem;">
@@ -156,11 +543,6 @@
           <span>Free to Use</span>
           <span class="legal-badge">Secure Uploads</span>
           <span class="legal-badge">Instant Download</span>
-        </div>
-
-        <!-- Tool Preview Section -->
-        <div style="margin: 3rem 0; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border-color); background: var(--surface-color); padding: 1rem;">
-          <img src="/squareframe_preview.png" alt="Preview of the SquarePic online image resizer interface" style="width: 100%; height: auto; border-radius: var(--radius-lg); display: block;" />
         </div>
 
         <!-- How It Works Section -->
@@ -430,5 +812,394 @@
       </div>
     </footer>
 
-  </body>
+<script>
+(function(){
+var S = {
+  img: null, ar: 1, tw: 1080, th: 1080,
+  scale: 1, ox: 0, oy: 0, dw: 0, dh: 0,
+  cx: 0, cy: 0, cw: 0, ch: 0,
+  zoom: 1,
+  drag: false, resize: false, handle: '',
+  sx: 0, sy: 0, ssx: 0, ssy: 0, ssw: 0, ssh: 0
+};
+
+var CATS = [
+  {name:'Instagram',presets:[
+    {n:'Profile Photo',ar:1,w:320,h:320},
+    {n:'Feed Square',ar:1,w:1080,h:1080},
+    {n:'Feed Portrait',ar:0.8,w:1080,h:1350},
+    {n:'Feed Landscape',ar:1.91,w:1080,h:566},
+    {n:'Story / Reels',ar:0.5625,w:1080,h:1920}
+  ]},
+  {name:'Facebook',presets:[
+    {n:'Profile Photo',ar:1,w:170,h:170},
+    {n:'Cover Photo',ar:2.63,w:820,h:312},
+    {n:'Share Image',ar:1.91,w:1200,h:630},
+    {n:'Story',ar:0.5625,w:1080,h:1920}
+  ]},
+  {name:'X / Twitter',presets:[
+    {n:'Profile Photo',ar:1,w:400,h:400},
+    {n:'Header',ar:3,w:1500,h:500},
+    {n:'Post Image',ar:1.78,w:1200,h:675}
+  ]},
+  {name:'LinkedIn',presets:[
+    {n:'Profile Photo',ar:1,w:400,h:400},
+    {n:'Banner',ar:4,w:1584,h:396},
+    {n:'Post Image',ar:1.91,w:1200,h:627}
+  ]},
+  {name:'YouTube',presets:[
+    {n:'Thumbnail',ar:1.78,w:1280,h:720},
+    {n:'Channel Art',ar:1.78,w:2560,h:1440},
+    {n:'Profile Photo',ar:1,w:800,h:800}
+  ]},
+  {name:'TikTok',presets:[
+    {n:'Profile Photo',ar:1,w:200,h:200},
+    {n:'Video Post',ar:0.5625,w:1080,h:1920}
+  ]}
+];
+
+var $id = function(id){ return document.getElementById(id); };
+var $canvas = $id('rsCanvas');
+var $ctx = $canvas.getContext('2d');
+var $upload = $id('rsUploadOverlay');
+var $file = $id('rsFileInput');
+var $con = $id('rsCanvasContainer');
+var $tabs = $id('rsPlatformTabs');
+var $grid = $id('rsPresetGrid');
+var $w = $id('rsWidth');
+var $h = $id('rsHeight');
+var $lock = $id('rsLockAspect');
+var $zlv = $id('rsZoomLevel');
+var $res = $id('rsResult');
+var $rc = $id('rsResultCanvas');
+var $rd = $id('rsResultDims');
+var $rs = $id('rsResultSize');
+var activeCat = 0, activePreset = 0;
+
+function fmt(ar){
+  var m = {1:'1:1',0.8:'4:5',0.5625:'9:16',1.78:'16:9',1.91:'1.91:1',2.63:'16:9',3:'3:1',4:'4:1'};
+  return m[ar] || ar.toFixed(2)+':1';
+}
+
+function loadPresets(){
+  $tabs.innerHTML = '';
+  $grid.innerHTML = '';
+  CATS.forEach(function(c,i){
+    var b = document.createElement('button');
+    b.className = 'rs-platform-tab'+(i===activeCat?' active':'');
+    b.textContent = c.name;
+    b.onclick = function(){ activeCat=i; activePreset=0; loadPresets(); selectPreset(0); };
+    $tabs.appendChild(b);
+  });
+  CATS[activeCat].presets.forEach(function(p,i){
+    var b = document.createElement('button');
+    b.className = 'rs-preset-btn'+(i===activePreset?' active':'');
+    b.innerHTML = '<span class="rs-preset-name">'+p.n+'</span><span class="rs-preset-meta">'+fmt(p.ar)+' &middot; '+p.w+'&times;'+p.h+'px</span>';
+    b.onclick = function(){ activePreset=i; selectPreset(i); };
+    $grid.appendChild(b);
+  });
+}
+
+function selectPreset(i){
+  activePreset = i;
+  var p = CATS[activeCat].presets[i];
+  S.ar = p.ar; S.tw = p.w; S.th = p.h;
+  $w.value = p.w; $h.value = p.h;
+  var btns = $grid.querySelectorAll('.rs-preset-btn');
+  btns.forEach(function(b,idx){ b.className = 'rs-preset-btn'+(idx===i?' active':''); });
+  initCrop(); render();
+}
+
+$upload.onclick = function(){ $file.click(); };
+$file.onchange = function(e){
+  if(e.target.files && e.target.files[0]) loadFile(e.target.files[0]);
+};
+$upload.addEventListener('dragover',function(e){ e.preventDefault(); $upload.classList.add('drag-over'); });
+$upload.addEventListener('dragleave',function(){ $upload.classList.remove('drag-over'); });
+$upload.addEventListener('drop',function(e){
+  e.preventDefault(); $upload.classList.remove('drag-over');
+  if(e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+$canvas.addEventListener('dragover',function(e){ e.preventDefault(); $upload.classList.add('drag-over'); });
+$canvas.addEventListener('dragleave',function(){ $upload.classList.remove('drag-over'); });
+$canvas.addEventListener('drop',function(e){
+  e.preventDefault(); $upload.classList.remove('drag-over');
+  if(e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+
+function loadFile(file){
+  if(!file.type.match(/image\/(jpeg|png|webp)/)){ alert('Please upload a JPG, PNG, or WebP image.'); return; }
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    var img = new Image();
+    img.onload = function(){
+      S.img = img;
+      $upload.style.display = 'none';
+      $canvas.style.display = 'block';
+      selectPreset(activePreset);
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function d2u(mx, my){
+  var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
+  return { x: (mx - cw/2*(1-z))/z, y: (my - ch/2*(1-z))/z };
+}
+
+function initCrop(){
+  if(!S.img) return;
+  var cw = $con.clientWidth, ch = $con.clientHeight;
+  var iar = S.img.width / S.img.height;
+  var car = cw / ch;
+  if(iar > car){ S.dw = cw; S.dh = cw / iar; S.ox = 0; S.oy = (ch - S.dh)/2; }
+  else{ S.dh = ch; S.dw = ch * iar; S.ox = (cw - S.dw)/2; S.oy = 0; }
+  S.scale = S.dw / S.img.width;
+  if(iar > S.ar){ S.cw = S.dw * 0.85; S.ch = S.cw / S.ar; }
+  else{ S.ch = S.dh * 0.85; S.cw = S.ch * S.ar; }
+  S.cx = S.ox + (S.dw - S.cw)/2;
+  S.cy = S.oy + (S.dh - S.ch)/2;
+  S.zoom = 1; $zlv.textContent = '100%';
+}
+
+function render(){
+  if(!S.img) return;
+  var cw = $con.clientWidth, ch = $con.clientHeight;
+  $canvas.width = cw; $canvas.height = ch;
+  $ctx.clearRect(0,0,cw,ch);
+  var z = S.zoom;
+  $ctx.save();
+  $ctx.translate(cw/2, ch/2);
+  $ctx.scale(z, z);
+  $ctx.translate(-cw/2, -ch/2);
+  $ctx.drawImage(S.img, S.ox, S.oy, S.dw, S.dh);
+  $ctx.restore();
+  drawOverlay();
+}
+
+function drawOverlay(){
+  var cw = $canvas.width, ch = $canvas.height;
+  var z = S.zoom, ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var l = S.cx*z+ox, t = S.cy*z+oy, r = (S.cx+S.cw)*z+ox, b = (S.cy+S.ch)*z+oy;
+  $ctx.fillStyle = 'rgba(0,0,0,0.55)';
+  $ctx.fillRect(0,0,cw,t); $ctx.fillRect(0,b,cw,ch-b);
+  $ctx.fillRect(0,t,l,b-t); $ctx.fillRect(r,t,cw-r,b-t);
+  $ctx.strokeStyle = '#fff'; $ctx.lineWidth = 2;
+  $ctx.strokeRect(l, t, r-l, b-t);
+  var hs = 8;
+  var pts = [[l,t],[(l+r)/2,t],[r,t],[r,(t+b)/2],[r,b],[(l+r)/2,b],[l,b],[l,(t+b)/2]];
+  $ctx.fillStyle = '#fff';
+  pts.forEach(function(p){
+    $ctx.fillRect(p[0]-hs/2, p[1]-hs/2, hs, hs);
+    $ctx.strokeStyle = '#000'; $ctx.lineWidth = 1;
+    $ctx.strokeRect(p[0]-hs/2, p[1]-hs/2, hs, hs);
+    $ctx.strokeStyle = '#fff'; $ctx.lineWidth = 2;
+  });
+}
+
+function getHandle(mx, my, thr){
+  thr = thr || 10;
+  var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
+  var ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var hx = [S.cx*z+ox, (S.cx+S.cw/2)*z+ox, (S.cx+S.cw)*z+ox];
+  var hy = [S.cy*z+oy, (S.cy+S.ch/2)*z+oy, (S.cy+S.ch)*z+oy];
+  var pts = [
+    ['nw',hx[0],hy[0]],['n',hx[1],hy[0]],['ne',hx[2],hy[0]],
+    ['e',hx[2],hy[1]],['se',hx[2],hy[2]],['s',hx[1],hy[2]],
+    ['sw',hx[0],hy[2]],['w',hx[0],hy[1]]
+  ];
+  for(var i=0;i<pts.length;i++){
+    var dx = mx-pts[i][1], dy = my-pts[i][2];
+    if(dx*dx+dy*dy <= thr*thr) return pts[i][0];
+  }
+  return null;
+}
+
+function isInCrop(mx, my){
+  var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
+  var ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var l = S.cx*z+ox, t = S.cy*z+oy;
+  return mx>=l && mx<=(S.cx+S.cw)*z+ox && my>=t && my<=(S.cy+S.ch)*z+oy;
+}
+
+function gpe(e){
+  var rect = $canvas.getBoundingClientRect();
+  var t = e.touches ? e.touches[0] : e;
+  return {x: t.clientX-rect.left, y: t.clientY-rect.top};
+}
+
+function onDown(e){
+  e.preventDefault();
+  var p = gpe(e);
+  var h = getHandle(p.x, p.y);
+  if(h){ S.resize=true; S.handle=h; }
+  else if(isInCrop(p.x, p.y)){ S.drag=true; }
+  else return;
+  S.sx=p.x; S.sy=p.y;
+  S.ssx=S.cx; S.ssy=S.cy; S.ssw=S.cw; S.ssh=S.ch;
+}
+
+function onMove(e){
+  e.preventDefault();
+  var p = gpe(e);
+  if(S.drag){
+    var u = d2u(p.x, p.y), su = d2u(S.sx, S.sy);
+    S.cx = S.ssx + (u.x-su.x);
+    S.cy = S.ssy + (u.y-su.y);
+    constrain(); render();
+  }else if(S.resize){
+    resizeCrop(p.x, p.y); render();
+  }else setCursor(p.x, p.y);
+}
+
+function onUp(e){ e.preventDefault(); S.drag=false; S.resize=false; }
+
+function setCursor(mx, my){
+  if(mx===undefined){ $canvas.style.cursor='default'; return; }
+  var h = getHandle(mx, my);
+  if(h){
+    var cs = {nw:'nwse-resize',n:'ns-resize',ne:'nesw-resize',e:'ew-resize',se:'nwse-resize',s:'ns-resize',sw:'nesw-resize',w:'ew-resize'};
+    $canvas.style.cursor = cs[h]||'default';
+  }else if(isInCrop(mx, my)){ $canvas.style.cursor = S.drag?'grabbing':'grab'; }
+  else{ $canvas.style.cursor = 'default'; }
+}
+
+function resizeCrop(mx, my){
+  var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
+  var ux = (mx - cw/2*(1-z))/z, uy = (my - ch/2*(1-z))/z;
+  var ssx=S.ssx, ssy=S.ssy, ssw=S.ssw, ssh=S.ssh;
+  var fx, fy;
+  switch(S.handle){
+    case 'nw': fx=ssx+ssw; fy=ssy+ssh; break;
+    case 'ne': fx=ssx; fy=ssy+ssh; break;
+    case 'se': fx=ssx; fy=ssy; break;
+    case 'sw': fx=ssx+ssw; fy=ssy; break;
+    case 'n': fx=ssx+ssw/2; fy=ssy+ssh; break;
+    case 's': fx=ssx+ssw/2; fy=ssy; break;
+    case 'e': fx=ssx; fy=ssy+ssh/2; break;
+    case 'w': fx=ssx+ssw; fy=ssy+ssh/2; break;
+  }
+  var nw = Math.abs(ux-fx), nh = Math.abs(uy-fy);
+  if(S.handle==='n'||S.handle==='s') nh = nw/S.ar;
+  else if(S.handle==='e'||S.handle==='w') nw = nh*S.ar;
+  else{ if(nw/nh > S.ar) nw=nh*S.ar; else nh=nw/S.ar; }
+  if(nw<30||nh<30) return;
+  var nx=fx, ny=fy;
+  if(S.handle.indexOf('n')>=0) ny=fy-nh;
+  if(S.handle.indexOf('s')>=0) ny=fy;
+  if(S.handle.indexOf('w')>=0) nx=fx-nw;
+  if(S.handle.indexOf('e')>=0) nx=fx;
+  if(S.handle==='n'||S.handle==='s') nx=fx-nw/2;
+  if(S.handle==='e'||S.handle==='w') ny=fy-nh/2;
+  S.cx=nx; S.cy=ny; S.cw=nw; S.ch=nh; constrain();
+}
+
+function constrain(){
+  var m = 5;
+  if(S.cx<S.ox+m) S.cx=S.ox+m;
+  if(S.cy<S.oy+m) S.cy=S.oy+m;
+  if(S.cx+S.cw>S.ox+S.dw-m) S.cx=S.ox+S.dw-m-S.cw;
+  if(S.cy+S.ch>S.oy+S.dh-m) S.cy=S.oy+S.dh-m-S.ch;
+  if(S.cw<20) S.cw=20; if(S.ch<20) S.ch=20;
+}
+
+$canvas.addEventListener('mousedown',onDown);
+$canvas.addEventListener('mousemove',onMove);
+$canvas.addEventListener('mouseup',onUp);
+$canvas.addEventListener('mouseleave',onUp);
+$canvas.addEventListener('touchstart',onDown,{passive:false});
+$canvas.addEventListener('touchmove',onMove,{passive:false});
+$canvas.addEventListener('touchend',onUp,{passive:false});
+$canvas.addEventListener('wheel',function(e){
+  e.preventDefault();
+  var delta = e.deltaY > 0 ? 1/1.1 : 1.1;
+  S.zoom = Math.min(Math.max(S.zoom * delta, 0.2), 5);
+  $zlv.textContent = Math.round(S.zoom*100)+'%';
+  render();
+},{passive:false});
+
+$id('rsZoomIn').onclick = function(){
+  S.zoom = Math.min(S.zoom*1.25,5);
+  $zlv.textContent = Math.round(S.zoom*100)+'%'; render();
+};
+$id('rsZoomOut').onclick = function(){
+  S.zoom = Math.max(S.zoom/1.25,0.2);
+  $zlv.textContent = Math.round(S.zoom*100)+'%'; render();
+};
+$id('rsFitView').onclick = function(){
+  S.zoom = 1; $zlv.textContent = '100%'; render();
+};
+
+$w.oninput = function(){
+  var v = parseInt($w.value)||1;
+  if($lock.checked) $h.value = Math.round(v/S.ar);
+  S.tw=v; S.th=parseInt($h.value)||1; S.ar=S.tw/S.th;
+  $grid.querySelectorAll('.rs-preset-btn').forEach(function(b){ b.className='rs-preset-btn'; });
+};
+$h.oninput = function(){
+  var v = parseInt($h.value)||1;
+  if($lock.checked) $w.value = Math.round(v*S.ar);
+  S.th=v; S.tw=parseInt($w.value)||1; S.ar=S.tw/S.th;
+  $grid.querySelectorAll('.rs-preset-btn').forEach(function(b){ b.className='rs-preset-btn'; });
+};
+
+$id('rsApplyBtn').onclick = function(){
+  if(!S.img) return;
+  var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
+  var ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var dl = S.cx*z+ox, dt = S.cy*z+oy;
+  var dr = (S.cx+S.cw)*z+ox, db = (S.cy+S.ch)*z+oy;
+  var sx = S.ox*z+ox, sy = S.oy*z+oy;
+  var sc = S.scale * z;
+  var ix = (dl - sx)/sc, iy = (dt - sy)/sc;
+  var iw = (dr-dl)/sc, ih = (db-dt)/sc;
+  var tw = S.tw||1080, th = S.th||1080;
+  $rc.width = tw; $rc.height = th;
+  var rctx = $rc.getContext('2d');
+  rctx.drawImage(S.img, ix, iy, iw, ih, 0, 0, tw, th);
+  $rd.textContent = tw+'\u00d7'+th+'px';
+  var dataUrl = $rc.toDataURL('image/png');
+  $rs.textContent = dataUrl.length > 1048576 ? (dataUrl.length/1048576).toFixed(1)+' MB' : (dataUrl.length/1024).toFixed(0)+' KB';
+  $res.style.display = 'block';
+};
+
+$id('rsDownloadBtn').onclick = function(){
+  if(!$rc.width||!$rc.height) return;
+  var lnk = document.createElement('a');
+  lnk.download = 'squarepic-'+S.tw+'x'+S.th+'.png';
+  lnk.href = $rc.toDataURL('image/png');
+  lnk.click();
+};
+
+$id('rsChangeBtn').onclick = function(){
+  S.img=null;
+  $canvas.style.display='none';
+  $upload.style.display='';
+  $res.style.display='none'; $file.value='';
+};
+
+window.addEventListener('resize',function(){
+  if(!S.img) return;
+  var ocw = $canvas.width, och = $canvas.height;
+  var ncw = $con.clientWidth, nch = $con.clientHeight;
+  if(ncw===ocw && nch===och) return;
+  var iar = S.img.width / S.img.height, car = ncw / nch;
+  var nox, noy, ndw, ndh;
+  if(iar>car){ ndw=ncw; ndh=ncw/iar; nox=0; noy=(nch-ndh)/2; }
+  else{ ndh=nch; ndw=nch*iar; nox=(ncw-ndw)/2; noy=0; }
+  var nsc = ndw / S.img.width;
+  if(ocw>0&&och>0){
+    var rx=S.cx/ocw, ry=S.cy/och, rw=S.cw/ocw, rh=S.ch/och;
+    S.cx=rx*ncw; S.cy=ry*nch; S.cw=rw*ncw; S.ch=rh*nch;
+  }
+  S.ox=nox; S.oy=noy; S.dw=ndw; S.dh=ndh; S.scale=nsc;
+  constrain(); render();
+});
+
+loadPresets();
+selectPreset(0);
+})();
+</script>
+</body>
 </html>

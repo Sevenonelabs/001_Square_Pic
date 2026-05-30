@@ -116,8 +116,403 @@
 
     
     
-    <script type="module" crossorigin src="/assets/main-BzemtNzi.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-BR6Cg8l4.css">
+    <style>
+      /* Converter Specific Premium Theme Customizations */
+      .converter-drop-zone {
+        border: 2px dashed var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 3rem 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+        background: rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+      .converter-drop-zone:hover {
+        border-color: var(--accent) !important;
+        background: rgba(255, 255, 255, 0.02) !important;
+        box-shadow: 0 0 16px var(--accent-glow);
+      }
+      .converter-drop-zone.drag-over {
+        border-color: var(--accent) !important;
+        background: var(--surface-mid) !important;
+        box-shadow: 0 0 20px var(--accent-glow);
+      }
+      .converter-drop-zone .upload-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 0 1.25rem;
+        color: var(--accent);
+        opacity: 0.85;
+        transition: var(--transition);
+        display: block;
+        flex-shrink: 0;
+      }
+      .converter-drop-zone h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+        transition: var(--transition);
+      }
+      .converter-drop-zone p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 1.25rem;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: var(--transition);
+      }
+      .converter-drop-zone button {
+        width: auto;
+        padding: 0.6rem 1.75rem;
+        font-size: 0.95rem;
+        color: #000000 !important;
+        flex-shrink: 0;
+      }
+      @media (max-width: 500px) {
+        .converter-drop-zone {
+          padding: 2rem 1rem;
+        }
+        .converter-drop-zone h3 { font-size: 1.1rem; }
+        .converter-drop-zone p { font-size: 0.82rem; }
+        .converter-drop-zone button { padding: 0.55rem 1.25rem; font-size: 0.85rem; }
+      }
+      
+      /* Compact responsive side-by-side mode */
+      @media (min-width: 768px) {
+        .converter-card.has-files {
+          display: grid;
+          grid-template-columns: 1.25fr 0.75fr;
+          gap: 1.5rem;
+          align-items: stretch;
+        }
+        .converter-card.has-files #converter-workspace {
+          grid-column: 1;
+          order: 1;
+        }
+        .converter-card.has-files .converter-drop-zone {
+          grid-column: 2;
+          order: 2;
+          height: 100%;
+          min-width: 280px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 2rem 1rem;
+          background: rgba(0, 0, 0, 0.22);
+          border-color: rgba(255, 255, 255, 0.05);
+        }
+        .converter-card.has-files .converter-drop-zone .upload-icon {
+          width: 38px;
+          height: 38px;
+          margin-bottom: 0.75rem;
+        }
+        .converter-card.has-files .converter-drop-zone h3 {
+          font-size: 1.15rem;
+          margin-bottom: 0.25rem;
+        }
+        .converter-card.has-files .converter-drop-zone p {
+          display: none;
+        }
+        .converter-card.has-files .converter-drop-zone button {
+          padding: 0.45rem 1.25rem;
+          font-size: 0.85rem;
+        }
+      }
+      @media (max-width: 767px) {
+        .converter-card.has-files {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+        .converter-card.has-files #converter-workspace {
+          order: 1;
+        }
+        .converter-card.has-files .converter-drop-zone {
+          order: 2;
+          padding: 1.75rem 1rem;
+        }
+        .converter-card.has-files .converter-drop-zone p {
+          display: none;
+        }
+        .converter-card.has-files .converter-drop-zone .upload-icon {
+          width: 32px;
+          height: 32px;
+          margin-bottom: 0.5rem;
+        }
+        .converter-card.has-files .converter-drop-zone h3 {
+          font-size: 1.05rem;
+        }
+      }
+      .format-popover {
+        position: absolute;
+        z-index: 10000;
+        width: 320px;
+        background: rgba(10, 14, 22, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--accent-glow);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        display: flex;
+        flex-direction: column;
+        animation: popoverFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+      }
+      @keyframes popoverFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .popover-body {
+        display: flex;
+        height: 200px;
+      }
+      .popover-left {
+        width: 90px;
+        border-right: 1px solid var(--border-soft);
+        display: flex;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.15);
+        padding: 0.4rem;
+        gap: 0.25rem;
+      }
+      .popover-cat-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.35rem 0.5rem;
+        text-align: left;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: var(--transition);
+      }
+      .popover-cat-btn:hover:not(.disabled) {
+        color: var(--text-main);
+        background: rgba(255,255,255,0.05);
+      }
+      .popover-cat-btn.active {
+        background: var(--accent-glow) !important;
+        color: var(--accent) !important;
+      }
+      .popover-cat-btn.disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .popover-right {
+        flex: 1;
+        padding: 0.75rem;
+        overflow-y: auto;
+      }
+      .formats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.4rem;
+      }
+      .format-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-soft);
+        color: var(--text-main);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.45rem 0.25rem;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        text-align: center;
+        transition: var(--transition);
+      }
+      .format-btn:hover {
+        background: var(--accent) !important;
+        color: #000 !important;
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 8px var(--accent-glow);
+        transform: translateY(-1px);
+      }
+      .format-btn.active {
+        background: var(--accent-glow) !important;
+        color: var(--accent) !important;
+        border-color: var(--accent) !important;
+      }
+      .file-row {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border-soft);
+        border-radius: var(--radius-lg);
+        padding: 0.6rem 0.8rem;
+        gap: 0.8rem;
+        transition: var(--transition);
+        position: relative;
+        overflow: visible;
+        flex-wrap: wrap;
+      }
+      .file-row:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: var(--border-color);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .file-row-thumb {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-md);
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+      .file-row-info {
+        flex: 1;
+        min-width: 150px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .file-row-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-main);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+      }
+      .file-row-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+      .file-row-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .file-row-format-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-soft);
+        color: var(--text-main);
+        font-weight: 700;
+        border-radius: var(--radius-sm);
+        padding: 0.3rem 1.5rem 0.3rem 0.5rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        min-width: 72px;
+        position: relative;
+        text-align: left;
+        transition: var(--transition);
+      }
+      .file-row-format-btn:hover {
+        background: rgba(255, 255, 255, 0.09);
+        border-color: var(--border-color);
+      }
+      .file-row-action-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0.35rem;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+      .file-row-action-btn:hover {
+        color: var(--accent);
+        background: var(--surface-color);
+      }
+      .file-row-action-btn.remove-btn:hover {
+        color: #f43f5e;
+        background: rgba(244, 63, 94, 0.1);
+      }
+      .file-settings-panel {
+        width: 100%;
+        border-top: 1px solid var(--border-soft);
+        padding-top: 0.6rem;
+        margin-top: 0.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        animation: panelSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes panelSlideDown {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .status-badge {
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 0.15rem 0.4rem;
+        border-radius: var(--radius-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .status-badge.ready {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-muted);
+      }
+      .status-badge.converting {
+        background: rgba(6, 182, 212, 0.1);
+        color: var(--accent);
+      }
+      .status-badge.done {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+      }
+      .status-badge.error {
+        background: rgba(244, 63, 94, 0.1);
+        color: #f43f5e;
+      }
+      .row-quality-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 2px;
+        background: var(--border-color);
+        border-radius: 2px;
+        outline: none;
+      }
+      .row-quality-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 4px;
+        height: 14px;
+        background: var(--accent);
+        border-radius: 1px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        margin-top: -6px;
+      }
+      .row-quality-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.3);
+        background: #fff;
+      }
+    </style>
+
+    <link rel="modulepreload" crossorigin href="data:text/javascript;base64,KGZ1bmN0aW9uKCl7bGV0IGU9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudChgbGlua2ApLnJlbExpc3Q7aWYoZSYmZS5zdXBwb3J0cyYmZS5zdXBwb3J0cyhgbW9kdWxlcHJlbG9hZGApKXJldHVybjtmb3IobGV0IGUgb2YgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChgbGlua1tyZWw9Im1vZHVsZXByZWxvYWQiXWApKW4oZSk7bmV3IE11dGF0aW9uT2JzZXJ2ZXIoZT0+e2ZvcihsZXQgdCBvZiBlKWlmKHQudHlwZT09PWBjaGlsZExpc3RgKWZvcihsZXQgZSBvZiB0LmFkZGVkTm9kZXMpZS50YWdOYW1lPT09YExJTktgJiZlLnJlbD09PWBtb2R1bGVwcmVsb2FkYCYmbihlKX0pLm9ic2VydmUoZG9jdW1lbnQse2NoaWxkTGlzdDohMCxzdWJ0cmVlOiEwfSk7ZnVuY3Rpb24gdChlKXtsZXQgdD17fTtyZXR1cm4gZS5pbnRlZ3JpdHkmJih0LmludGVncml0eT1lLmludGVncml0eSksZS5yZWZlcnJlclBvbGljeSYmKHQucmVmZXJyZXJQb2xpY3k9ZS5yZWZlcnJlclBvbGljeSksZS5jcm9zc09yaWdpbj09PWB1c2UtY3JlZGVudGlhbHNgP3QuY3JlZGVudGlhbHM9YGluY2x1ZGVgOmUuY3Jvc3NPcmlnaW49PT1gYW5vbnltb3VzYD90LmNyZWRlbnRpYWxzPWBvbWl0YDp0LmNyZWRlbnRpYWxzPWBzYW1lLW9yaWdpbmAsdH1mdW5jdGlvbiBuKGUpe2lmKGUuZXApcmV0dXJuO2UuZXA9ITA7bGV0IG49dChlKTtmZXRjaChlLmhyZWYsbil9fSkoKTs=">
+
+    <link rel="modulepreload" crossorigin href="/assets/main-BR6Cg8l4-eXJIxxjD-ZJHyTSn8-ZJHyTSn8.js">
+    <link rel="modulepreload" crossorigin href="/assets/main-BR6Cg8l4-Bhtx6_JF-CBMzbzpw-B1tAoPyX.js">
+    <script type="module" crossorigin src="/assets/converter-BL01v2zr.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/main-BR6Cg8l4-Bhtx6_JF-Bhtx6_JF-DeikvvAk.js">
+    <link rel="stylesheet" crossorigin href="/assets/main-BR6Cg8l4-Bhtx6_JF-Bhtx6_JF-Bhtx6_JF.css">
   </head>
   <body>
     <header>
@@ -132,9 +527,78 @@
           Upgrade your photo's format. Convert basic JPG files into high-quality, lossless PNG formats perfect for graphic design and web usage.
         </p>
         
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <a href="/" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none; color: #ffffff !important;">Convert to PNG</a>
+        <!-- Interactive Multi-File Image Converter Tool -->
+        <div id="converter-tool" class="converter-card" style="margin: 2rem 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); position: relative; overflow: visible; transition: all 0.3s ease;">
+          
+          <!-- Drop & Select Zone -->
+          <div id="converter-drop-zone" class="converter-drop-zone">
+            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="converter-upload-title">
+              <title id="converter-upload-title">Upload Image to Convert</title>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <h3 id="drop-zone-title">Drag & Drop Images</h3>
+            <p>Upload one or more photos to convert instantly. All processing is 100% secure and done entirely in your browser.</p>
+            <button class="btn-primary" id="select-files-btn">Choose Photos</button>
+            <input type="file" id="converter-file-input" multiple accept="image/*" style="display: none;">
+          </div>
+
+          <!-- Files List Container (Initially Hidden) -->
+          <div id="converter-workspace" style="display: none;">
+            
+            <!-- Global Options / Top Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-soft); flex-wrap: wrap; gap: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span id="files-count-badge" style="background: var(--accent-glow); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700;">0 files</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">added</span>
+              </div>
+              
+              <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                <!-- Add More Files Trigger -->
+                <button id="add-more-btn" class="btn-secondary" style="width: auto; padding: 0.4rem 0.8rem; display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Add More
+                </button>
+                
+                <!-- Bulk Target Format -->
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">Convert all to:</span>
+                  <div style="position: relative; display: inline-block;">
+                    <button id="bulk-format-btn" class="bulk-format-btn" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-main); font-weight: 700; border-radius: var(--radius-sm); padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 0.25rem; min-width: 80px; text-align: left; transition: var(--transition); border-color: var(--border-soft);">
+                      <span id="bulk-format-label">WEBP</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="position: absolute; right: 0.6rem; top: 38%;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- List of Files -->
+            <div id="converter-files-list" style="display: flex; flex-direction: column; gap: 0.75rem; max-height: 400px; overflow-y: auto; padding-right: 0.25rem; margin-bottom: 1.5rem;">
+              <!-- Individual rows will be injected dynamically -->
+            </div>
+
+            <!-- Bottom Actions Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+              <button id="clear-all-btn" class="btn-secondary" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+                Clear All
+              </button>
+              
+              <div style="display: flex; gap: 0.75rem;">
+                <button id="convert-all-btn" class="btn-primary" style="width: auto; padding: 0.6rem 2rem; font-size: 0.95rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; color: #ffffff !important;">
+                  <span>Convert Files</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                
+                <button id="download-all-btn" class="btn-primary" style="display: none; width: auto; padding: 0.6rem 2rem; font-size: 0.95rem; font-weight: 800; background: var(--accent); color: #000000 !important; box-shadow: 0 10px 25px var(--accent-glow);">
+                  Download All
+                </button>
+              </div>
+            </div>
+
+          </div>
+
         </div>
+
 
         <div class="legal-meta" style="justify-content: center; margin-bottom: 3rem;">
           <span>Lossless Quality</span>
