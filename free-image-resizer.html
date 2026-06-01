@@ -128,14 +128,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="twitter:url" content="https://squarepic.io/free-image-resizer" />
     <meta property="twitter:title" content="Image Resizer | Resize Images Online Free | SquarePic" />
     <meta property="twitter:description" content="Resize your images online for free without losing quality. Perfect for social media, creators, and business. No signup required." />
-    <meta property="twitter:image" content="https://squarepic.io/squareframe_preview.png" />
+    <meta property="twitter:image" content="https://squarepic.io/squareframe_preview.png" />
+
 
     
 
     
 
 
-    
+    
+
+
     
     <link rel="stylesheet" crossorigin href="/assets/main-BR6Cg8l4.css">
     <script type="module" crossorigin src="/assets/main-BzemtNzi.js"></script>
@@ -1115,12 +1118,30 @@ function resizeCrop(mx, my){
 }
 
 function constrain(){
-  var m = 0;
-  if(S.cx<S.ox+m) S.cx=S.ox+m;
-  if(S.cy<S.oy+m) S.cy=S.oy+m;
-  if(S.cx+S.cw>S.ox+S.dw-m) S.cx=S.ox+S.dw-m-S.cw;
-  if(S.cy+S.ch>S.oy+S.dh-m) S.cy=S.oy+S.dh-m-S.ch;
-  if(S.cw<20) S.cw=20; if(S.ch<20) S.ch=20;
+  if (S.cw > S.dw) {
+    S.cw = S.dw;
+    S.ch = S.cw / S.ar;
+  }
+  if (S.ch > S.dh) {
+    S.ch = S.dh;
+    S.cw = S.ch * S.ar;
+  }
+  if (S.cx < S.ox) S.cx = S.ox;
+  if (S.cy < S.oy) S.cy = S.oy;
+  if (S.cx + S.cw > S.ox + S.dw) {
+    S.cx = S.ox + S.dw - S.cw;
+  }
+  if (S.cy + S.ch > S.oy + S.dh) {
+    S.cy = S.oy + S.dh - S.ch;
+  }
+  if (S.cw < 20) {
+    S.cw = 20;
+    S.ch = S.cw / S.ar;
+  }
+  if (S.ch < 20) {
+    S.ch = 20;
+    S.cw = S.ch * S.ar;
+  }
 }
 
 $canvas.addEventListener('mousedown',onDown);
