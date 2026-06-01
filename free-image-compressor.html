@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       gtag('config', 'G-9TTBK0ZDM5');
     </script>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon-OPYOZRvc-OPYOZRvc.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#080a0e" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src-elem 'self' https://www.googletagmanager.com https://www.google-analytics.com;"/>
@@ -702,7 +702,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <link rel="modulepreload" crossorigin href="/assets/main-BR6Cg8l4-eXJIxxjD-ZJHyTSn8-ZJHyTSn8.js">
     <link rel="modulepreload" crossorigin href="/assets/main-BR6Cg8l4-Bhtx6_JF-CBMzbzpw-B1tAoPyX.js">
-    <script type="module" crossorigin src="/assets/converter-BL01v2zr.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/main-BR6Cg8l4-Bhtx6_JF-Bhtx6_JF-DeikvvAk.js">
     <link rel="stylesheet" crossorigin href="/assets/main-BR6Cg8l4-Bhtx6_JF-Bhtx6_JF-Bhtx6_JF.css">
   </head>
@@ -711,13 +710,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFGGLL8S"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-<a href="#main" class="skip-link" style="position:absolute;top:-100px;left:8px;z-index:10000;padding:8px 16px;background:var(--accent);color:#000;border-radius:0 0 8px 8px;font-weight:700;font-size:0.85rem;text-decoration:none;transition:top 0.2s;">Skip to Content</a>
+<a href="#tool-section" class="skip-link" style="position:absolute;top:-100px;left:8px;z-index:10000;padding:8px 16px;background:var(--accent);color:#000;border-radius:0 0 8px 8px;font-weight:700;font-size:0.85rem;text-decoration:none;transition:top 0.2s;">Skip to Content</a>
     <header>
       <a href="/" class="logo" style="text-decoration: none;">SquarePic</a>
       <div style="display: flex; gap: 0.5rem; align-items: center;">
-        <a href="design-hub" class="header-link-cta" style="display: inline-flex; align-items: center; gap: 5px; padding: 0.4rem 0.75rem; background: var(--accent); color: #000 !important; border-radius: var(--radius-md); font-size: 0.75rem; font-weight: 800; text-decoration: none; letter-spacing: 0.02em; white-space: nowrap; transition: var(--transition);">
-          SquarePic DESIGN HUB
-        </a>
+        
         <a href="/" class="btn-secondary" style="width: auto; padding: 0.4rem 1rem; color: #ffffff !important;">Go to Editor</a>
       </div>
     </header>
@@ -729,86 +726,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p style="text-align: center; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">
           Shrink the file size of your photos without ruining the quality. Compress JPG, PNG, and WebP files instantly for faster web loading and easier email sharing.
         </p>
-
-        <!-- Interactive Multi-File Image Converter Tool -->
-        <div id="converter-tool" class="converter-card" style="margin: 2rem 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); position: relative; overflow: visible; transition: all 0.3s ease;">
-          
-          <!-- Drop & Select Zone -->
-          <div id="converter-drop-zone" class="converter-drop-zone">
-            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="converter-upload-title">
-              <title id="converter-upload-title">Upload Image to Convert</title>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
-            <h3 id="drop-zone-title">Drag & Drop Images</h3>
-            <p>Upload one or more photos to convert instantly. All processing is 100% secure and done entirely in your browser.</p>
-            <button class="btn-primary" id="select-files-btn">Choose Photos</button>
-            <input type="file" id="converter-file-input" multiple accept="image/*" style="display: none;">
-          </div>
-
-          <!-- Files List Container (Initially Hidden) -->
-          <div id="converter-workspace" style="display: none;">
-            
-            <!-- Global Options / Top Bar -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-soft); flex-wrap: wrap; gap: 0.75rem;">
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span id="files-count-badge" style="background: var(--accent-glow); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700;">0 files</span>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">added</span>
-              </div>
-              
-              <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <!-- Add More Files Trigger -->
-                <button id="add-more-btn" class="btn-secondary" style="width: auto; padding: 0.4rem 0.8rem; display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  Add More
-                </button>
-                
-                <!-- Bulk Target Format -->
-                <div style="display: flex; align-items: center; gap: 0.4rem;">
-                  <span style="font-size: 0.8rem; color: var(--text-muted);">Convert all to:</span>
-                  <div style="position: relative; display: inline-block;">
-                    <button id="bulk-format-btn" class="bulk-format-btn" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-main); font-weight: 700; border-radius: var(--radius-sm); padding: 0.35rem 1.75rem 0.35rem 0.75rem; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 0.25rem; min-width: 80px; text-align: left; transition: var(--transition); border-color: var(--border-soft);">
-                      <span id="bulk-format-label">WEBP</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="position: absolute; right: 0.6rem; top: 38%;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- List of Files -->
-            <div id="converter-files-list" style="display: flex; flex-direction: column; gap: 0.75rem; max-height: 400px; overflow-y: auto; padding-right: 0.25rem; margin-bottom: 1.5rem;">
-              <!-- Individual rows will be injected dynamically -->
-            </div>
-
-            <!-- Bottom Actions Bar -->
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 1rem; flex-wrap: wrap; gap: 0.75rem;">
-              <button id="clear-all-btn" class="btn-secondary" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
-                Clear All
-              </button>
-              
-              <div style="display: flex; gap: 0.75rem;">
-                <button id="convert-all-btn" class="btn-primary" style="width: auto; padding: 0.6rem 2rem; font-size: 0.95rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; color: #ffffff !important;">
-                  <span>Convert Files</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                
-                <button id="download-all-btn" class="btn-primary" style="display: none; width: auto; padding: 0.6rem 2rem; font-size: 0.95rem; font-weight: 800; background: var(--accent); color: #000000 !important; box-shadow: 0 10px 25px var(--accent-glow);">
-                  Download All
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="legal-meta" style="justify-content: center; margin-bottom: 2rem;">
-          <span>Zero Quality Loss</span>
-          <span>Fast Processing</span>
-          <span class="legal-badge">Private & Secure</span>
-          <span class="legal-badge">Free to Use</span>
-        </div>
 
         <!-- Interactive Multi-File Image Compressor Tool -->
         <div id="compressor-tool" class="converter-card" style="margin: 2rem 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 1.5rem; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); position: relative; overflow: visible; transition: all 0.3s ease;">

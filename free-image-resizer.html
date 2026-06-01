@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#080a0e" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; script-src-elem 'self' https://www.googletagmanager.com https://www.google-analytics.com;"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;"/>
     <title>Image Resizer | Resize Images Online Free | SquarePic</title>
     <meta name="description" content="Resize your images online for free without losing quality. Perfect for social media, creators, and business. No signup required." />
     <link rel="canonical" href="https://squarepic.io/free-image-resizer" />
@@ -241,6 +241,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             position: relative;
             cursor: default;
             touch-action: none;
+            background: #3a3a3a;
           }
           .rs-canvas-container canvas {
             display: block;
@@ -495,6 +496,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <span id="rsZoomLevel">100%</span>
                   <button class="rs-btn-icon" id="rsZoomIn" title="Zoom In" type="button">+</button>
                   <button class="rs-btn-icon" id="rsFitView" title="Fit to View" type="button">⟷</button>
+                  <button class="rs-btn-icon" id="rsResetBtn" title="Reset Crop" type="button">↺</button>
                 </div>
               </div>
 
@@ -830,9 +832,9 @@ var S = {
   img: null, ar: 1, tw: 1080, th: 1080,
   scale: 1, ox: 0, oy: 0, dw: 0, dh: 0,
   cx: 0, cy: 0, cw: 0, ch: 0,
-  zoom: 1,
-  drag: false, resize: false, handle: '',
-  sx: 0, sy: 0, ssx: 0, ssy: 0, ssw: 0, ssh: 0
+  zoom: 1, panX: 0, panY: 0,
+  drag: false, resize: false, pan: false, handle: '',
+  sx: 0, sy: 0, ssx: 0, ssy: 0, ssw: 0, ssh: 0, spx: 0, spy: 0
 };
 
 var CATS = [
@@ -957,7 +959,7 @@ function loadFile(file){
 
 function d2u(mx, my){
   var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
-  return { x: (mx - cw/2*(1-z))/z, y: (my - ch/2*(1-z))/z };
+  return { x: (mx - cw/2*(1-z) - S.panX)/z, y: (my - ch/2*(1-z) - S.panY)/z };
 }
 
 function initCrop(){
@@ -968,11 +970,11 @@ function initCrop(){
   if(iar > car){ S.dw = cw; S.dh = cw / iar; S.ox = 0; S.oy = (ch - S.dh)/2; }
   else{ S.dh = ch; S.dw = ch * iar; S.ox = (cw - S.dw)/2; S.oy = 0; }
   S.scale = S.dw / S.img.width;
-  if(iar > S.ar){ S.cw = S.dw * 0.85; S.ch = S.cw / S.ar; }
-  else{ S.ch = S.dh * 0.85; S.cw = S.ch * S.ar; }
+  if(iar > S.ar){ S.ch = S.dh; S.cw = S.ch * S.ar; }
+  else{ S.cw = S.dw; S.ch = S.cw / S.ar; }
   S.cx = S.ox + (S.dw - S.cw)/2;
   S.cy = S.oy + (S.dh - S.ch)/2;
-  S.zoom = 1; $zlv.textContent = '100%';
+  S.zoom = 1; S.panX = 0; S.panY = 0; $zlv.textContent = '100%';
 }
 
 function render(){
@@ -982,7 +984,7 @@ function render(){
   $ctx.clearRect(0,0,cw,ch);
   var z = S.zoom;
   $ctx.save();
-  $ctx.translate(cw/2, ch/2);
+  $ctx.translate(cw/2 + S.panX, ch/2 + S.panY);
   $ctx.scale(z, z);
   $ctx.translate(-cw/2, -ch/2);
   $ctx.drawImage(S.img, S.ox, S.oy, S.dw, S.dh);
@@ -992,7 +994,7 @@ function render(){
 
 function drawOverlay(){
   var cw = $canvas.width, ch = $canvas.height;
-  var z = S.zoom, ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var z = S.zoom, ox = cw/2*(1-z) + S.panX, oy = ch/2*(1-z) + S.panY;
   var l = S.cx*z+ox, t = S.cy*z+oy, r = (S.cx+S.cw)*z+ox, b = (S.cy+S.ch)*z+oy;
   $ctx.fillStyle = 'rgba(0,0,0,0.55)';
   $ctx.fillRect(0,0,cw,t); $ctx.fillRect(0,b,cw,ch-b);
@@ -1013,7 +1015,7 @@ function drawOverlay(){
 function getHandle(mx, my, thr){
   thr = thr || 10;
   var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
-  var ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var ox = cw/2*(1-z) + S.panX, oy = ch/2*(1-z) + S.panY;
   var hx = [S.cx*z+ox, (S.cx+S.cw/2)*z+ox, (S.cx+S.cw)*z+ox];
   var hy = [S.cy*z+oy, (S.cy+S.ch/2)*z+oy, (S.cy+S.ch)*z+oy];
   var pts = [
@@ -1030,7 +1032,7 @@ function getHandle(mx, my, thr){
 
 function isInCrop(mx, my){
   var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
-  var ox = cw/2*(1-z), oy = ch/2*(1-z);
+  var ox = cw/2*(1-z) + S.panX, oy = ch/2*(1-z) + S.panY;
   var l = S.cx*z+ox, t = S.cy*z+oy;
   return mx>=l && mx<=(S.cx+S.cw)*z+ox && my>=t && my<=(S.cy+S.ch)*z+oy;
 }
@@ -1047,9 +1049,10 @@ function onDown(e){
   var h = getHandle(p.x, p.y);
   if(h){ S.resize=true; S.handle=h; }
   else if(isInCrop(p.x, p.y)){ S.drag=true; }
-  else return;
+  else{ S.pan=true; }
   S.sx=p.x; S.sy=p.y;
   S.ssx=S.cx; S.ssy=S.cy; S.ssw=S.cw; S.ssh=S.ch;
+  S.spx=S.panX; S.spy=S.panY;
 }
 
 function onMove(e){
@@ -1062,10 +1065,14 @@ function onMove(e){
     constrain(); render();
   }else if(S.resize){
     resizeCrop(p.x, p.y); render();
+  }else if(S.pan){
+    S.panX = S.spx + (p.x - S.sx);
+    S.panY = S.spy + (p.y - S.sy);
+    render();
   }else setCursor(p.x, p.y);
 }
 
-function onUp(e){ e.preventDefault(); S.drag=false; S.resize=false; }
+function onUp(e){ e.preventDefault(); S.drag=false; S.resize=false; S.pan=false; }
 
 function setCursor(mx, my){
   if(mx===undefined){ $canvas.style.cursor='default'; return; }
@@ -1074,12 +1081,12 @@ function setCursor(mx, my){
     var cs = {nw:'nwse-resize',n:'ns-resize',ne:'nesw-resize',e:'ew-resize',se:'nwse-resize',s:'ns-resize',sw:'nesw-resize',w:'ew-resize'};
     $canvas.style.cursor = cs[h]||'default';
   }else if(isInCrop(mx, my)){ $canvas.style.cursor = S.drag?'grabbing':'grab'; }
-  else{ $canvas.style.cursor = 'default'; }
+  else{ $canvas.style.cursor = S.pan?'grabbing':'grab'; }
 }
 
 function resizeCrop(mx, my){
   var z = S.zoom, cw = $canvas.width, ch = $canvas.height;
-  var ux = (mx - cw/2*(1-z))/z, uy = (my - ch/2*(1-z))/z;
+  var ux = (mx - cw/2*(1-z) - S.panX)/z, uy = (my - ch/2*(1-z) - S.panY)/z;
   var ssx=S.ssx, ssy=S.ssy, ssw=S.ssw, ssh=S.ssh;
   var fx, fy;
   switch(S.handle){
@@ -1108,7 +1115,7 @@ function resizeCrop(mx, my){
 }
 
 function constrain(){
-  var m = 5;
+  var m = 0;
   if(S.cx<S.ox+m) S.cx=S.ox+m;
   if(S.cy<S.oy+m) S.cy=S.oy+m;
   if(S.cx+S.cw>S.ox+S.dw-m) S.cx=S.ox+S.dw-m-S.cw;
@@ -1141,6 +1148,9 @@ $id('rsZoomOut').onclick = function(){
 };
 $id('rsFitView').onclick = function(){
   S.zoom = 1; $zlv.textContent = '100%'; render();
+};
+$id('rsResetBtn').onclick = function(){
+  initCrop(); render();
 };
 
 $w.oninput = function(){
