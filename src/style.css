@@ -2513,9 +2513,9 @@ tr:last-child td {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 55%;
-  height: 80%;
-  border-radius: 8px;
-  background: linear-gradient(145deg, #4a5a4a, #3a4a5a);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(145deg, #4a5a4a, #3a5a4a);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
