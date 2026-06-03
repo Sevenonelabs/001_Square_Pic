@@ -139,7 +139,423 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     
     
+    <style>
+      /* ─── Cropper tool styles ─────────────────────────────────── */
+      .cropper-section {
+        max-width: 1100px !important;
+      }
+      .cropper-tool {
+        margin: 2rem 0;
+        background: var(--surface-color);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        position: relative;
+        overflow: visible;
+        transition: all 0.3s ease;
+      }
+      .cropper-drop-zone {
+        border: 2px dashed var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 3rem 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+        background: rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+      .cropper-drop-zone:hover {
+        border-color: var(--accent) !important;
+        background: rgba(255,255,255,0.02) !important;
+        box-shadow: 0 0 16px var(--accent-glow);
+      }
+      .cropper-drop-zone.drag-over {
+        border-color: var(--accent) !important;
+        background: var(--surface-mid) !important;
+        box-shadow: 0 0 20px var(--accent-glow);
+      }
+      .cropper-drop-zone .upload-icon {
+        width: 48px; height: 48px;
+        margin: 0 0 1.25rem;
+        color: var(--accent); opacity: 0.85;
+        display: block; flex-shrink: 0;
+      }
+      .cropper-drop-zone h3 {
+        font-size: 1.35rem; font-weight: 700;
+        margin-bottom: 0.5rem; color: var(--text-main);
+      }
+      .cropper-drop-zone p {
+        font-size: 0.9rem; color: var(--text-muted);
+        margin-bottom: 1.25rem;
+        max-width: 420px; margin-left: auto; margin-right: auto;
+      }
+      .cropper-drop-zone button { width: auto; }
+      @media (max-width: 500px) {
+        .cropper-drop-zone { padding: 2rem 1rem; }
+        .cropper-drop-zone h3 { font-size: 1.1rem; }
+        .cropper-drop-zone p { font-size: 0.82rem; }
+      }
+
+      /* ─── Workspace layout ──────────────────────────────────── */
+      .cropper-workspace { display: none; }
+      .cropper-layout {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: 1.25rem;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .cropper-layout { grid-template-columns: 1fr; }
+      }
+
+      /* ─── Preview area ──────────────────────────────────────── */
+      .cropper-preview {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+      .cropper-viewport {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background: #111;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        cursor: grab;
+        border: 1px solid var(--border-soft);
+        min-height: 360px;
+      }
+      .cropper-viewport:active { cursor: grabbing; }
+      #cropperCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ─── Crop overlay ──────────────────────────────────────── */
+      .crop-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        display: none;
+      }
+      .crop-region {
+        position: absolute;
+        pointer-events: auto;
+        box-shadow: 0 0 0 9999px rgba(0,0,0,0.45);
+        border: 2px solid #fff;
+        cursor: move;
+      }
+      .crop-grid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .crop-handle {
+        position: absolute;
+        width: 12px; height: 12px;
+        background: #fff;
+        border: 2px solid var(--accent);
+        border-radius: 2px;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .crop-handle-nw { top: -6px; left: -6px; cursor: nwse-resize; }
+      .crop-handle-n  { top: -6px; left: calc(50% - 6px); cursor: ns-resize; }
+      .crop-handle-ne { top: -6px; right: -6px; cursor: nesw-resize; }
+      .crop-handle-e  { top: calc(50% - 6px); right: -6px; cursor: ew-resize; }
+      .crop-handle-se { bottom: -6px; right: -6px; cursor: nwse-resize; }
+      .crop-handle-s  { bottom: -6px; left: calc(50% - 6px); cursor: ns-resize; }
+      .crop-handle-sw { bottom: -6px; left: -6px; cursor: nesw-resize; }
+      .crop-handle-w  { top: calc(50% - 6px); left: -6px; cursor: ew-resize; }
+
+      /* ─── Info bar ──────────────────────────────────────────── */
+      .cropper-info-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.25rem;
+        background: rgba(0,0,0,0.15);
+        border-radius: var(--radius-md);
+        padding: 0.6rem 1rem;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        border: 1px solid var(--border-soft);
+      }
+      .cropper-info-bar .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .cropper-info-bar .info-label { opacity: 0.7; }
+      .cropper-info-bar .info-value {
+        color: var(--text-main);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ─── Controls sidebar ──────────────────────────────────── */
+      .cropper-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        background: rgba(0,0,0,0.15);
+        border-radius: var(--radius-lg);
+        padding: 1rem;
+        border: 1px solid var(--border-soft);
+        min-width: 0;
+      }
+      .cropper-controls .ctrl-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .cropper-controls .ctrl-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        opacity: 0.8;
+      }
+
+      /* Aspect ratio pills */
+      .ratio-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .ratio-btn {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border-soft);
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.3rem 0.55rem;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: inherit;
+      }
+      .ratio-btn:hover {
+        background: rgba(255,255,255,0.08);
+        color: var(--text-main);
+        border-color: var(--border-color);
+      }
+      .ratio-btn.active {
+        background: var(--accent-glow) !important;
+        color: var(--accent) !important;
+        border-color: var(--accent) !important;
+      }
+
+      /* Action buttons row */
+      .cropper-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .cropper-actions .btn-primary,
+      .cropper-actions .btn-secondary {
+        flex: 1;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
+        height: auto;
+        min-width: 0;
+        white-space: nowrap;
+      }
+      .cropper-actions .btn-primary { color: #000 !important; }
+
+      /* Export panel */
+      .cropper-export-panel {
+        position: absolute;
+        z-index: 100;
+        width: 260px;
+        right: 0;
+        top: calc(100% + 6px);
+        background: rgba(10,14,22,0.98);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        display: none;
+        flex-direction: column;
+        animation: popoverFadeIn 0.18s cubic-bezier(0.16,1,0.3,1);
+        overflow: hidden;
+        padding: 0.75rem;
+      }
+      .cropper-export-panel.show { display: flex; }
+      @keyframes popoverFadeIn {
+        from { opacity: 0; transform: translateY(8px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .crop-save-btn {
+        width: 100%;
+        padding: 0.65rem;
+        font-size: 0.9rem;
+        font-weight: 800;
+        background: var(--accent);
+        color: #000 !important;
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        margin-top: 0.5rem;
+        font-family: inherit;
+        transition: var(--transition);
+      }
+      .crop-save-btn:hover {
+        box-shadow: 0 10px 25px var(--accent-glow);
+        transform: translateY(-1px);
+      }
+
+      /* Export panel nested elements */
+      .ep-section { margin-bottom: 0.5rem; }
+      .ep-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        opacity: 0.8;
+        margin-bottom: 0.3rem;
+      }
+      .format-tabs {
+        display: flex;
+        gap: 4px;
+      }
+      .format-tabs .format-tab {
+        flex: 1;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border-soft);
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.35rem 0.25rem;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-family: inherit;
+        transition: var(--transition);
+        text-align: center;
+      }
+      .format-tabs .format-tab:hover {
+        background: rgba(255,255,255,0.08);
+        color: var(--text-main);
+      }
+      .format-tabs .format-tab.active {
+        background: var(--accent-glow) !important;
+        color: var(--accent) !important;
+        border-color: var(--accent) !important;
+      }
+      .fmt-hint {
+        font-size: 0.65rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+      }
+      .ep-info-card {
+        background: rgba(0,0,0,0.2);
+        border-radius: var(--radius-md);
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .ep-info-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        padding: 0.15rem 0;
+      }
+      .ep-info-row .ep-info-label { color: var(--text-muted); }
+      .ep-info-row .ep-info-val { color: var(--text-main); font-weight: 700; }
+      .ep-divider { height: 1px; background: var(--border-soft); margin: 0.25rem 0; }
+
+      /* Background color picker */
+      .bg-picker-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .bg-picker-row input[type="color"] {
+        width: 36px;
+        height: 30px;
+        padding: 0;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        cursor: pointer;
+      }
+      .bg-picker-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+      .bg-picker-row input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 2px;
+      }
+      .bg-picker-row span {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+      }
+
+      /* Zoom slider */
+      .zoom-slider-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .zoom-slider-row input[type="range"] {
+        flex: 1;
+        height: 2px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: var(--border-color);
+        border-radius: 2px;
+        outline: none;
+      }
+      .zoom-slider-row input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 4px; height: 14px;
+        background: var(--accent);
+        border-radius: 1px;
+        cursor: pointer;
+      }
+      .zoom-slider-row .zoom-pct {
+        font-size: 0.75rem;
+        color: var(--text-main);
+        font-weight: 700;
+        min-width: 40px;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .zoom-btn {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid var(--border-soft);
+        color: var(--text-main);
+        width: 28px; height: 28px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: inherit;
+        transition: var(--transition);
+        padding: 0;
+        line-height: 1;
+      }
+      .zoom-btn:hover { background: rgba(255,255,255,0.12); }
+      .zoom-btn:disabled { opacity: 0.3; cursor: default; }
+
+      /* Est. file size color classes */
+      .size-small { color: #10b981 !important; }
+      .size-medium { color: #f59e0b !important; }
+      .size-large { color: #f43f5e !important; }
+    </style>
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/cropper.ts"></script>
       <link rel="stylesheet" href="/src/style.css">
       <link rel="stylesheet" href="/assets/fonts.css">
   </head>
@@ -148,31 +564,171 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFGGLL8S"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+<a href="#cropper-tool" class="skip-link" style="position:absolute;top:-100px;left:8px;z-index:10000;padding:8px 16px;background:var(--accent);color:#000;border-radius:0 0 8px 8px;font-weight:700;font-size:0.85rem;text-decoration:none;transition:top 0.2s;">Skip to Tool</a>
 <header></header>
     <main>
-      <section class="content-section legal-content" style="max-width: 800px;">
+      <section class="content-section legal-content cropper-section" style="max-width: 1100px;">
 
         <!-- Hero Section -->
         <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Free Online Photo Cropper</h1>
         <p style="text-align: center; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">
           Frame your shots perfectly. Crop images instantly in your browser to highlight the best parts of your photo and remove unwanted edges without any quality loss.
         </p>
-        
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <a href="/" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none; color: #ffffff !important;">Upload Photo</a>
-        </div>
 
-        <div class="legal-meta" style="justify-content: center; margin-bottom: 3rem;">
+        <div class="legal-meta" style="justify-content: center; margin-bottom: 2rem;">
           <span>100% Free</span>
           <span>No Signups</span>
           <span class="legal-badge">Private Local Processing</span>
           <span class="legal-badge">No Watermarks</span>
         </div>
 
-        <!-- Tool Preview Section -->
-        <div style="margin: 3rem 0; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border-color); background: var(--surface-color); padding: 1rem;">
-          <img src="/squareframe_preview.png" alt="SquarePic interface showing a photo being cropped" style="width: 100%; height: auto; border-radius: var(--radius-lg); display: block;" />
+        <!-- ═══════════════ Interactive Cropper Tool ═══════════════ -->
+        <div class="cropper-tool" id="cropperTool">
+
+          <!-- Drop Zone -->
+          <div class="cropper-drop-zone" id="cropperDropZone">
+            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="crop-upload-title">
+              <title id="crop-upload-title">Upload Image to Crop</title>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <h3>Drag & Drop Image</h3>
+            <p>Upload a photo to crop. All processing is 100% secure and done entirely in your browser.</p>
+            <button class="btn-primary" id="cropperSelectBtn">Choose Photo</button>
+            <input type="file" id="cropperFileInput" accept="image/*" hidden>
+          </div>
+
+          <!-- Workspace -->
+          <div class="cropper-workspace" id="cropperWorkspace">
+            <div class="cropper-layout">
+
+              <!-- Preview -->
+              <div class="cropper-preview">
+                <div class="cropper-viewport" id="cropperViewport">
+                  <canvas id="cropperCanvas"></canvas>
+                  <div class="crop-overlay" id="cropOverlay">
+                    <div class="crop-region" id="cropRegion">
+                      <div class="crop-grid" id="cropGrid"></div>
+                      <div class="crop-handle crop-handle-nw" data-handle="nw"></div>
+                      <div class="crop-handle crop-handle-n" data-handle="n"></div>
+                      <div class="crop-handle crop-handle-ne" data-handle="ne"></div>
+                      <div class="crop-handle crop-handle-e" data-handle="e"></div>
+                      <div class="crop-handle crop-handle-se" data-handle="se"></div>
+                      <div class="crop-handle crop-handle-s" data-handle="s"></div>
+                      <div class="crop-handle crop-handle-sw" data-handle="sw"></div>
+                      <div class="crop-handle crop-handle-w" data-handle="w"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cropper-info-bar">
+                  <span class="info-item">
+                    <span class="info-label">Original:</span>
+                    <span class="info-value" id="cropOrigDims">-- × --</span>
+                  </span>
+                  <span class="info-item">
+                    <span class="info-label">Crop:</span>
+                    <span class="info-value" id="cropCropDims">-- × --</span>
+                  </span>
+                  <span class="info-item">
+                    <span class="info-label">Export:</span>
+                    <span class="info-value" id="cropExportDims">-- × --</span>
+                  </span>
+                  <span class="info-item">
+                    <span class="info-label">Zoom:</span>
+                    <span class="info-value" id="cropZoomPct">--</span>
+                  </span>
+                  <span class="info-item">
+                    <span class="info-label">Est. Size:</span>
+                    <span class="info-value" id="cropFileSize">--</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <aside class="cropper-controls">
+
+                <!-- Zoom -->
+                <div class="ctrl-group">
+                  <span class="ctrl-label">Zoom</span>
+                  <div class="zoom-slider-row">
+                    <button class="zoom-btn" id="cropZoomOut" disabled>−</button>
+                    <input type="range" id="cropZoomSlider" min="10" max="2000" value="100" disabled>
+                    <button class="zoom-btn" id="cropZoomIn" disabled>+</button>
+                    <span class="zoom-pct" id="cropZoomDisplay">100%</span>
+                  </div>
+                </div>
+
+                <!-- Aspect Ratio -->
+                <div class="ctrl-group">
+                  <span class="ctrl-label">Aspect Ratio</span>
+                  <div class="ratio-pills" id="cropRatioBtns">
+                    <button class="ratio-btn active" data-ratio="free">Free</button>
+                    <button class="ratio-btn" data-ratio="1:1">1:1</button>
+                    <button class="ratio-btn" data-ratio="4:5">4:5</button>
+                    <button class="ratio-btn" data-ratio="3:2">3:2</button>
+                    <button class="ratio-btn" data-ratio="4:3">4:3</button>
+                    <button class="ratio-btn" data-ratio="16:9">16:9</button>
+                    <button class="ratio-btn" data-ratio="9:16">9:16</button>
+                  </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="ctrl-group" style="position:relative;">
+                  <button class="btn-primary" id="cropExportBtn" disabled style="width:100%;color:#000!important;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export Crop
+                  </button>
+                  <div class="cropper-export-panel" id="cropExportMenu">
+                    <div class="ep-section">
+                      <div class="ep-label">Format</div>
+                      <div class="format-tabs" id="cropFormatTabs">
+                        <button class="format-tab active" data-fmt="jpeg">JPEG</button>
+                        <button class="format-tab" data-fmt="png">PNG</button>
+                        <button class="format-tab" data-fmt="webp">WebP</button>
+                        <button class="format-tab" data-fmt="avif">AVIF</button>
+                      </div>
+                      <div class="fmt-hint" id="cropFmtHint">Lossy · Smallest file · Best for photos</div>
+                    </div>
+                    <div class="ep-section" id="cropQualitySection" style="display:flex;flex-direction:column;gap:0.25rem;">
+                      <div style="display:flex;justify-content:space-between;">
+                        <span class="ep-label">Quality</span>
+                        <span id="cropQualityVal" style="font-size:0.75rem;color:var(--text-main);font-weight:700;">90%</span>
+                      </div>
+                      <input type="range" id="cropQuality" min="10" max="100" value="90" style="width:100%;">
+                    </div>
+                    <div class="ep-section" id="cropBgPicker" style="display:flex;flex-direction:column;gap:0.25rem;">
+                      <span class="ep-label">Background Fill</span>
+                      <div class="bg-picker-row">
+                        <input type="color" id="cropBgColor" value="#ffffff">
+                        <span>For JPEG transparency fallback</span>
+                      </div>
+                    </div>
+                    <div class="ep-info-card">
+                      <div class="ep-info-row">
+                        <span class="ep-info-label">Export Size</span>
+                        <span class="ep-info-val" id="cropExportDims2">-- × --</span>
+                      </div>
+                      <div class="ep-divider"></div>
+                      <div class="ep-info-row">
+                        <span class="ep-info-label">Est. Size</span>
+                        <span class="ep-info-val ep-size-val" id="cropFileSize2">--</span>
+                      </div>
+                    </div>
+                    <button class="crop-save-btn" id="cropConfirmExport">Download Cropped Image</button>
+                  </div>
+                </div>
+
+                <div class="cropper-actions">
+                  <button class="btn-secondary" id="cropUploadNew" style="color:var(--text-muted);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    New Image
+                  </button>
+                </div>
+
+              </aside>
+            </div>
+          </div>
         </div>
+        <!-- ═══════════════ End Cropper Tool ═══════════════ -->
 
         <!-- How It Works Section -->
         <div class="legal-section">
@@ -313,14 +869,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
             Get the perfect framing instantly. Upload your image and crop it for free securely in your browser.
           </p>
-          <a href="/" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none; color: #ffffff !important;">Start Cropping</a>
+          <a href="#cropper-tool" class="btn-primary" style="display: inline-block; width: auto; padding: 1rem 3rem; font-size: 1.2rem; text-decoration: none; color: #ffffff !important;">Start Cropping</a>
         </div>
 
       </section>
     </main>
 
-                                    
-    
+    <!-- Bottom Sheet -->
+    <div id="bottomSheet" class="bottom-sheet">
+      <div class="sheet-header">
+        <h2 id="sheetTitle"></h2>
+        <button id="closeSheetBtn" class="close-sheet" aria-label="Close">&times;</button>
+      </div>
+      <div id="sheetContent" class="sheet-content"></div>
+    </div>
 
   </body>
 </html>
