@@ -1,6 +1,5 @@
 # Ignore build outputs & dependencies
 node_modules/
-dist/
 test_built.py
 test_built2.py
 test_index.py
@@ -31,12 +30,11 @@ logs/
 opencode.json
 skills-lock.json
 
-# Ignore development source files and configs not needed to run the website
-src/
+# Ignore development docs/outputs not needed to build
 docs/
 scripts/
-tsconfig.json
-package.json
-package-lock.json
-vite.config.ts
 server.js
+
+# Build outputs
+dist/
+dist-ssr/
