@@ -1,225 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://squarepic.io/about</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://squarepic.io/</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://squarepic.io/faq</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-facebook-cover-photo-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-facebook-cover-photo-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-facebook-cover-photo-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-facebook-post-image-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-facebook-post-image-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-facebook-post-image-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-facebook-profile-picture-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-facebook-profile-picture-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-facebook-profile-picture-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-image-compressor</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-image-compressor"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-image-compressor"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-image-converter</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-image-converter"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-image-converter"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-image-optimizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-image-optimizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-image-optimizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-image-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-image-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-image-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-instagram-photo-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-instagram-photo-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-instagram-photo-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-instagram-reels-cover-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-instagram-reels-cover-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-instagram-reels-cover-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-instagram-square-photo</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-instagram-square-photo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-instagram-square-photo"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-instagram-story-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-instagram-story-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-instagram-story-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-jpg-to-png</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-jpg-to-png"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-jpg-to-png"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-linkedin-banner-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-linkedin-banner-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-linkedin-banner-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-linkedin-profile-picture-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-linkedin-profile-picture-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-linkedin-profile-picture-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-online-photo-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-online-photo-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-online-photo-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-passport-photo-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-passport-photo-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-passport-photo-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-photo-cropper</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-photo-cropper"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-photo-cropper"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-png-to-jpg</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-png-to-jpg"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-png-to-jpg"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-profile-picture-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-profile-picture-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-profile-picture-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-resize-image-without-losing-quality</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-resize-image-without-losing-quality"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-resize-image-without-losing-quality"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-square-image-tool</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-square-image-tool"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-square-image-tool"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-tiktok-profile-picture-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-tiktok-profile-picture-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-tiktok-profile-picture-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-twitch-banner-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-twitch-banner-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-twitch-banner-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-twitch-profile-picture-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-twitch-profile-picture-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-twitch-profile-picture-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-twitter-header-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-twitter-header-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-twitter-header-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-webp-to-png</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-webp-to-png"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-webp-to-png"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-website-banner-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-website-banner-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-website-banner-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-whatsapp-dp-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-whatsapp-dp-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-whatsapp-dp-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-youtube-channel-art-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-youtube-channel-art-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-youtube-channel-art-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-youtube-profile-picture-maker</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-youtube-profile-picture-maker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-youtube-profile-picture-maker"/>
   </url>
   <url>
     <loc>https://squarepic.io/free-youtube-thumbnail-resizer</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://squarepic.io/</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/free-youtube-thumbnail-resizer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/free-youtube-thumbnail-resizer"/>
   </url>
   <url>
     <loc>https://squarepic.io/privacy</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://squarepic.io/support</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/privacy"/>
   </url>
   <url>
     <loc>https://squarepic.io/terms</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/terms"/>
+  </url>
+  <url>
+    <loc>https://squarepic.io/support</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/support"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/support"/>
+  </url>
+  <url>
+    <loc>https://squarepic.io/about</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/about"/>
+  </url>
+  <url>
+    <loc>https://squarepic.io/faq</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://squarepic.io/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://squarepic.io/faq"/>
   </url>
 </urlset>
