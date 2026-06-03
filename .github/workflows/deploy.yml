@@ -1,4 +1,4 @@
-name: Deploy to Hostinger (FTP Sync)
+name: Deploy to Hostinger (Build + FTP Sync)
 
 on:
   push:
@@ -14,15 +14,37 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Deploy root files to Hostinger via FTP
-      - name: Sync root to Hostinger
+      # 2. Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build for production
+      - name: Build
+        run: npm run build
+
+      # 5. Copy root assets into dist for deployment
+      - name: Copy root assets to dist
+        run: |
+          cp robots.txt dist/ 2>/dev/null || true
+          cp sitemap.xml dist/ 2>/dev/null || true
+
+      # 6. Deploy built files to Hostinger via FTP
+      - name: Sync dist to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server:   ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
+          local-dir: dist/
           server-dir: /public_html/
+          delete-removed: true
           exclude: |
             **/.git*
             **/.git*/**
