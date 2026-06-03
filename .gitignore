@@ -1,6 +1,10 @@
 # Ignore build outputs & dependencies
 node_modules/
 dist/
+test_built.py
+test_built2.py
+test_index.py
+test_screenshot.png
 dist-ssr/
 *.local
 
