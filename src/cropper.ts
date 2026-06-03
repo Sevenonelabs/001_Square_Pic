@@ -1,4 +1,4 @@
-﻿import './style.css';
+import './style.css';
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -59,7 +59,7 @@ let showBgPicker = true;
 
 let dropZone: HTMLElement;
 let fileInput: HTMLInputElement;
-let selectBtn: HTMLElement;
+let selectBtn: HTMLButtonElement;
 let workspace: HTMLElement;
 let viewportEl: HTMLElement;
 let canvas: HTMLCanvasElement;
@@ -760,7 +760,7 @@ function resetTool() {
 function init() {
   dropZone = document.getElementById('cropperDropZone')!;
   fileInput = document.getElementById('cropperFileInput') as HTMLInputElement;
-  selectBtn = document.getElementById('cropperSelectBtn') as HTMLElement;
+  selectBtn = document.getElementById('cropperSelectBtn') as HTMLButtonElement;
   workspace = document.getElementById('cropperWorkspace')!;
   viewportEl = document.getElementById('cropperViewport')!;
   canvas = document.getElementById('cropperCanvas') as HTMLCanvasElement;
@@ -818,7 +818,8 @@ function init() {
   });
   ro.observe(viewportEl);
 
-  // Upload — label element handles this natively via for='cropperFileInput'
+  // Upload
+  selectBtn.addEventListener('click', () => fileInput.click());
   fileInput.addEventListener('change', (e) => {
     const file = (e.target as HTMLInputElement).files?.[0];
     if (file) loadImage(file);
