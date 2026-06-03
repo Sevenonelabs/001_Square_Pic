@@ -356,7 +356,7 @@ function renderFilesList() {
 
       <!-- Preview Image -->
       <div style="position: relative; width: 100%; aspect-ratio: 16/10; border-radius: var(--radius-md); overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
-        <img src="${item.src}" style="width: 100%; height: 100%; object-fit: cover;" alt="Thumbnail">
+        <img src="${item.src}" style="width: 100%; height: 100%; object-fit: cover;" alt="SquarePic image compressor preview thumbnail">
         ${item.status === 'compressing' ? `
           <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;">
             <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style="width: 24px; height: 24px; color: var(--accent); animation: spin 1s linear infinite;"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity: 0.25;"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" style="opacity: 0.75;"></path></svg>

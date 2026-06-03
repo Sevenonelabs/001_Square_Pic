@@ -326,7 +326,7 @@ function renderFilesList() {
 
     row.innerHTML = `
       <div class="file-row-main" style="display: flex; align-items: center; width: 100%; gap: 0.8rem; flex-wrap: nowrap;">
-        <img src="${item.src}" class="file-row-thumb" alt="Thumbnail">
+        <img src="${item.src}" class="file-row-thumb" alt="SquarePic image converter preview thumbnail">
         
         <div class="file-row-info" style="flex: 1; min-width: 0;">
           <div class="file-row-name" title="${item.name}">${truncateMiddle(item.name)}</div>
