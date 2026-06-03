@@ -753,6 +753,7 @@ function resetTool() {
   viewport.zoom = 1;
   viewport.panX = 0;
   viewport.panY = 0;
+  fileInput.value = '';
 }
 
 // ─── Init ───────────────────────────────────────────────────────
