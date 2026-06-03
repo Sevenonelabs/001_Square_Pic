@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Google Tag Manager -->
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#080a0e" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' blob: data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src-elem 'self' https://www.googletagmanager.com https://www.google-analytics.com;"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' blob: data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; script-src-elem 'self' https://www.googletagmanager.com https://www.google-analytics.com;"/>
     <title>Free Online Photo Cropper - Crop Images | SquarePic</title>
     <meta name="description" content="Crop photos online for free. Adjust aspect ratios, frame your subjects perfectly, and download high-quality images without any watermarks." />
     <link rel="canonical" href="https://squarepic.io/free-photo-cropper" />
@@ -593,8 +593,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </svg>
             <h3>Drag & Drop Image</h3>
             <p>Upload a photo to crop. All processing is 100% secure and done entirely in your browser.</p>
-            <button class="btn-primary" id="cropperSelectBtn">Choose Photo</button>
-            <input type="file" id="cropperFileInput" accept="image/*" hidden>
+            <label for="cropperFileInput" class="btn-primary" id="cropperSelectBtn" role="button" tabindex="0" style="cursor:pointer;display:inline-block;">Choose Photo</label>
+            <input type="file" id="cropperFileInput" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;">
           </div>
 
           <!-- Workspace -->
