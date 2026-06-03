@@ -30,10 +30,13 @@ jobs:
         run: npm run build
 
       # 5. Copy root assets into dist for deployment
+      #   (OG meta / inline images / favicon are hardcoded to root paths)
       - name: Copy root assets to dist
         run: |
           cp robots.txt dist/ 2>/dev/null || true
           cp sitemap.xml dist/ 2>/dev/null || true
+          cp favicon.svg dist/ 2>/dev/null || true
+          cp squareframe_preview.png dist/ 2>/dev/null || true
 
       # 6. Deploy built files to Hostinger via FTP
       - name: Sync dist to Hostinger
@@ -44,7 +47,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
           server-dir: /public_html/
-          delete-removed: true
           exclude: |
             **/.git*
             **/.git*/**
