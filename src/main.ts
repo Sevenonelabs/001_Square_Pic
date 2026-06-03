@@ -61,15 +61,6 @@ function sidebarHTML(): string {
       <span class="badge-item" style="font-size: 0.72rem; padding: 0.35rem 0.6rem;"><span class="badge-check">✓</span> No Watermarks</span>
       <span class="badge-item" style="font-size: 0.72rem; padding: 0.35rem 0.6rem; white-space: normal;"><span class="badge-check">✓</span> Privacy-First Local Processing</span>
     </div>
-    <div class="control-card" style="background: var(--accent-glow); border-color: var(--accent); margin-bottom: 0.5rem;">
-      <h3 style="color: var(--accent);">Full Editor</h3>
-      <nav class="sidebar-nav">
-        <a href="https://squarepic.io" target="_blank" class="sidebar-link" style="color: var(--accent);">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          Launch SquarePic Editor
-        </a>
-      </nav>
-    </div>
     <div class="control-card">
       <h3>Core Tools</h3>
       <nav class="sidebar-nav">
@@ -175,7 +166,6 @@ function footerHTML(): string {
         <a href="faq" class="sheet-trigger">FAQ</a>
         <a href="privacy" class="sheet-trigger">Privacy</a>
         <a href="terms" class="sheet-trigger">Terms</a>
-        <a href="https://squarepic.io" target="_blank" style="color: var(--accent); font-weight: 800; text-decoration: none; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; transition: var(--transition);">Launch Editor →</a>
       </nav>
       <div class="footer-trust" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
         <div class="privacy-badge">

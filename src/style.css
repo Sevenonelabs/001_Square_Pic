@@ -133,9 +133,14 @@ header {
     grid-template-columns: auto 1fr;
     gap: 0.5rem;
     padding: 0 1rem;
+    overflow: hidden;
+  }
+  .header-left {
+    min-width: 0;
   }
   .header-right {
     gap: 0.75rem;
+    min-width: 0;
   }
 }
 
@@ -209,18 +214,30 @@ header {
 }
 
 @media (max-width: 600px) {
+  header {
+    padding: 0 0.75rem;
+  }
+  .header-left {
+    gap: 6px;
+  }
+  .logo {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+  }
   .header-center-title {
     font-size: 0.7rem;
-    max-width: 40%;
+    max-width: 35%;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
   }
-  
   .theme-picker {
     gap: 3px;
   }
-  
   .theme-dot {
     width: 9px !important;
     height: 9px !important;
@@ -228,8 +245,19 @@ header {
 }
 
 @media (max-width: 400px) {
+  header {
+    padding: 0 0.5rem;
+  }
+  .logo {
+    max-width: 80px;
+    font-size: 0.85rem;
+  }
   .header-center-title {
-    font-size: 0.62rem;
+    font-size: 0.55rem;
+    max-width: 28%;
+  }
+  .sidebar-toggle {
+    margin-right: 6px;
   }
 }
 
@@ -2790,7 +2818,13 @@ body.is-subpage .legal-content div:has(> h2):has(> a.btn-primary) {
   }
   
   .logo {
-    font-size: 1rem !important;
+    font-size: 1rem;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
   }
   
   .mode-btn {
